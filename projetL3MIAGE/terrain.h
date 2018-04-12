@@ -23,6 +23,7 @@ public:
 
     //Autre méthodes
     void afficher() const;
+
 };
 
 #endif // PLOT_H

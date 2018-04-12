@@ -35,7 +35,7 @@ void Agence::sauvegarde()
 
 void Agence::sauvegardeVendeurs()
 {
-    std::ofstream fichier_vendeur("../save/sellers.txt", std::ios::out | std::ios::trunc);
+    std::ofstream fichier_vendeur("../save/vendeurs.txt", std::ios::out | std::ios::trunc);
     if(fichier_vendeur) {
         for(Vendeur v : m_vendeurs) {
             fichier_vendeur << v.getNom() << ":" << v.getPrenom() << ":"
@@ -43,13 +43,13 @@ void Agence::sauvegardeVendeurs()
         }
         fichier_vendeur.close();
     } else {
-        std::cerr << "Impossible d'ouvrir sellers.txt" << std::endl;
+        std::cerr << "Impossible d'ouvrir vendeurs.txt" << std::endl;
     }
 }
 
 void Agence::sauvegardeAcheteurs()
 {
-    std::ofstream fichier_acheteur("../save/buyers.txt", std::ios::out | std::ios::trunc);
+    std::ofstream fichier_acheteur("../save/acheteurs.txt", std::ios::out | std::ios::trunc);
     if(fichier_acheteur) {
         for(Acheteur a : m_acheteur) {
             fichier_acheteur << a.getNom() << ":" << a.getPrenom() << ":"
@@ -57,13 +57,13 @@ void Agence::sauvegardeAcheteurs()
         }
         fichier_acheteur.close();
     } else {
-        std::cerr << "Impossible d'ouvrir buyers.txt" << std::endl;
+        std::cerr << "Impossible d'ouvrir acheteurs.txt" << std::endl;
     }
 }
 
 void Agence::sauvegardeBienImmobiliers()
 {
-    std::ofstream fichier_bienImmobilier("../save/realEstates.txt", std::ios::out | std::ios::trunc);
+    std::ofstream fichier_bienImmobilier("../save/bienImmobiliers.txt", std::ios::out | std::ios::trunc);
     if(fichier_bienImmobilier) {
         for (std::pair<BienImmobilier*,Client> b : m_bienImmobiliers) {
             if(b.first->getSauvegardeType() == 'a') {
@@ -92,8 +92,10 @@ void Agence::sauvegardeBienImmobiliers()
 
             }
         }
+        fichier_bienImmobilier.close();
+    } else {
+        std::cerr << "Impossible d'ouvrir bienImmobiliers.txt" << std::endl;
     }
-    fichier_bienImmobilier.close();
 }
 
 void Agence::ouverture()
@@ -105,7 +107,7 @@ void Agence::ouverture()
 
 void Agence::ouvertureVendeurs()
 {
-    std::ifstream fichier_vendeur("../save/sellers.txt", std::ios::in);
+    std::ifstream fichier_vendeur("../save/vendeurs.txt", std::ios::in);
     if(fichier_vendeur) {
         std::string contenu;
         while(std::getline(fichier_vendeur, contenu)) {
@@ -117,13 +119,13 @@ void Agence::ouvertureVendeurs()
             m_vendeurs.push_back(s);
         }
     } else {
-        std::cerr << "Impossible d'ouvrir sellers.txt" << std::endl;
+        std::cerr << "Impossible d'ouvrir vendeurs.txt" << std::endl;
     }
 }
 
 void Agence::ouvertureAcheteurs()
 {
-    std::ifstream fichier_acheteur("../save/buyers.txt", std::ios::in);
+    std::ifstream fichier_acheteur("../save/acheteurs.txt", std::ios::in);
     if(fichier_acheteur) {
         std::string contenu;
         while(std::getline(fichier_acheteur, contenu)) {
@@ -135,7 +137,7 @@ void Agence::ouvertureAcheteurs()
             m_acheteur.push_back(b);
         }
     } else {
-        std::cerr << "Impossible d'ouvrir buyers.txt" << std::endl;
+        std::cerr << "Impossible d'ouvrir acheteurs.txt" << std::endl;
     }
 }
 
@@ -169,7 +171,7 @@ void Agence::ouvertureTerrains(std::vector<std::string> infos)
 
 void Agence::ouvertureBienImmobiliers()
 {
-    std::ifstream fichier_bienImmbilier("../save/realEstates.txt", std::ios::in);
+    std::ifstream fichier_bienImmbilier("../save/bienImmobiliers.txt", std::ios::in);
     if(fichier_bienImmbilier) {
         std::string contenu;
         while(std::getline(fichier_bienImmbilier, contenu)) {
@@ -185,7 +187,7 @@ void Agence::ouvertureBienImmobiliers()
             }
         }
     } else {
-        std::cerr << "Impossible d'ouvrir buyers.txt" << std::endl;
+        std::cerr << "Impossible d'ouvrir bienImmobiliers.txt" << std::endl;
     }
 }
 

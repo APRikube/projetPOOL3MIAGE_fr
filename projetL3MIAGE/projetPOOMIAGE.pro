@@ -32,4 +32,7 @@ HEADERS += \
 DISTFILES += \
     ../save/buyers.txt \
     ../save/realEstates.txt \
-    ../save/sellers.txt
+    ../save/sellers.txt \
+    ../save/acheteurs.txt \
+    ../save/bienImmobiliers.txt \
+    ../save/vendeurs.txt

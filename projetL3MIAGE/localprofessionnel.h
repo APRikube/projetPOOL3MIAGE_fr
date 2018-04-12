@@ -24,6 +24,9 @@ public:
     //Setters
     void setSalleDeStockage(bool newSalleDeStockage);
     void setTailleVitrine(int newTailleVitrine);
+
+    //Autre méthodes
+    void afficher() const;
 };
 
 #endif // PROFESSIONALLOCAL_H

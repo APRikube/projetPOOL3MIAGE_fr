@@ -27,3 +27,14 @@ void Terrain::setConstructible(bool newConstructible)
 {
     this->m_constructible = newConstructible;
 }
+
+void Terrain::afficher() const
+{
+    cout << "L'appartement est localisé à " << m_adresse << endl;
+    cout << "Il est vendu pour " << m_prix << "€" << endl;
+    cout << "Ca surface est de " << m_surface << " métres carrés" << endl;
+    if (m_constructible)
+    {
+        cout << "De plus, c'est un terrain constructible." << endl;
+    }
+}

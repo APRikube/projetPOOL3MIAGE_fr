@@ -14,7 +14,7 @@ private:
     Vendeur m_vendeur;
     BienImmobilier m_re;
 public:
-    //Constructors
+    //Constructeurs
     Visite() = delete;
     Visite(Acheteur b, Vendeur s, BienImmobilier re);
 
@@ -31,7 +31,7 @@ public:
     //Operators
     bool operator<(Visite const& v) const;
 
-    //Other Methods
+    //Autre méthode
     void afficher() const;
 };
 

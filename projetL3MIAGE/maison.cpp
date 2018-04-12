@@ -47,3 +47,18 @@ char Maison::getSauvegardeType() const
 {
     return 'm';
 }
+
+void Maison::afficher() const
+{
+    cout << "L'appartement est localisé à " << m_adresse << endl;
+    cout << "Il est vendu pour " << m_prix << "€" << endl;
+    cout << "Ca surface est de " << m_surface << " métres carrés et est composé de " << m_nbSalles << endl;
+    if (m_piscine)
+    {
+        cout << "Elle possède une piscine." << endl;
+    }
+    if (m_garage)
+    {
+        cout << "Elle possède un garage." << endl;
+    }
+}

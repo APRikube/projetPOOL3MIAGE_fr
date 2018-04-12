@@ -2,7 +2,7 @@
 
 
 Terrain::Terrain(bool constructible, unsigned int prix, std::string adresse, short surface, Vendeur vendeur)
-    :choixBienImmobilier(prix, adresse, surface, vendeur), m_constructible(constructible)
+    :BienImmobilier(prix, adresse, surface, vendeur), m_constructible(constructible)
 {
 
 }

@@ -4,21 +4,21 @@
 #include "client.h"
 #include <vector>
 
-class choixBienImmobilier;
+class BienImmobilier;
 
 class Vendeur : public Client
 {
 private:
-    std::vector<choixBienImmobilier> m_bienImmobilierAVendre;
+    std::vector<BienImmobilier> m_bienImmobilierAVendre;
 public:
     Vendeur();
 
     virtual std::string getType() const;
-    void ajoutBienImmobilierAVendre(choixBienImmobilier re);
-    void vendreBienImmobilier(choixBienImmobilier re);
+    void ajoutBienImmobilierAVendre(BienImmobilier re);
+    void vendreBienImmobilier(BienImmobilier re);
 
     //Getter
-    std::vector<choixBienImmobilier> getBienImmobilierAVendre() const;
+    std::vector<BienImmobilier> getBienImmobilierAVendre() const;
 
 };
 

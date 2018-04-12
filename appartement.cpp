@@ -1,7 +1,7 @@
 #include "appartement.h"
 
 Appartement::Appartement(std::string addresse, short surface, unsigned int prix, Vendeur seller, unsigned short nbSalles, unsigned int etage, bool garage, bool cave, bool balcon, unsigned int nbAppartBatiment)
-    :choixBienImmobilier(prix, addresse, surface, seller), m_nbSalles(nbSalles), m_etage(etage), m_garage(garage), m_cave(cave), m_balcon(balcon), m_nbAppartBatiment(nbAppartBatiment)
+    :BienImmobilier(prix, addresse, surface, seller), m_nbSalles(nbSalles), m_etage(etage), m_garage(garage), m_cave(cave), m_balcon(balcon), m_nbAppartBatiment(nbAppartBatiment)
 {
 
 }

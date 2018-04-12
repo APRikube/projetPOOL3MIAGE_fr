@@ -1,14 +1,14 @@
 #include "bienimmobilier.h"
 
-int choixBienImmobilier::nextId = 0;
+int BienImmobilier::nextId = 0;
 
-choixBienImmobilier::choixBienImmobilier(unsigned int prix, std::string addresse, unsigned short surface, Vendeur vendeur)
+BienImmobilier::BienImmobilier(unsigned int prix, std::string addresse, unsigned short surface, Vendeur vendeur)
     :m_prix(prix), m_adresse(addresse), m_surface(surface), m_vendeur(vendeur)
 {
-    m_identifiant = choixBienImmobilier::nextId++;
+    m_identifiant = BienImmobilier::nextId++;
 }
 
-choixBienImmobilier::choixBienImmobilier(const choixBienImmobilier & re)
+BienImmobilier::BienImmobilier(const BienImmobilier & re)
 {
     this->m_identifiant = re.getIdentifiant();
     this->m_adresse = re.getAdresse();
@@ -18,52 +18,52 @@ choixBienImmobilier::choixBienImmobilier(const choixBienImmobilier & re)
 }
 
 //Getters
-unsigned int choixBienImmobilier::getPrix() const
+unsigned int BienImmobilier::getPrix() const
 {
     return m_prix;
 }
 
-std::string choixBienImmobilier::getAdresse() const
+std::string BienImmobilier::getAdresse() const
 {
     return m_adresse;
 }
 
-short choixBienImmobilier::getSurface() const
+short BienImmobilier::getSurface() const
 {
     return m_surface;
 }
 
-Vendeur choixBienImmobilier::getVendeur() const
+Vendeur BienImmobilier::getVendeur() const
 {
     return m_vendeur;
 }
 
-int choixBienImmobilier::getIdentifiant() const
+int BienImmobilier::getIdentifiant() const
 {
     return m_identifiant;
 }
 
-std::string choixBienImmobilier::getType() const
+std::string BienImmobilier::getType() const
 {
     return "real estate";
 }
 
-char choixBienImmobilier::getSauvegardeType() const
+char BienImmobilier::getSauvegardeType() const
 {
     return 'r';
 }
 
-bool choixBienImmobilier::operator<(const choixBienImmobilier & re) const
+bool BienImmobilier::operator<(const BienImmobilier & re) const
 {
     return (this->getIdentifiant() < re.getIdentifiant());
 }
 
-bool choixBienImmobilier::operator==(const choixBienImmobilier & re) const
+bool BienImmobilier::operator==(const BienImmobilier & re) const
 {
     return (this->getIdentifiant() == re.getIdentifiant());
 }
 
-void choixBienImmobilier::afficher() const
+void BienImmobilier::afficher() const
 {
     std::cout << "Mon bien immobilierrrrrr" << std::endl;
 }

@@ -1,40 +1,40 @@
 #include "localprofessionnel.h"
 
-ProfessionalLocal::ProfessionalLocal()
+LocalProfessionnel::LocalProfessionnel()
 {
 
 }
 
-ProfessionalLocal::ProfessionalLocal(unsigned short tailleVitrine, bool salleDeStockageDeMateriaux, unsigned int prix, std::string adresse, short surface, Vendeur vendeur)
-    :choixBienImmobilier(prix, adresse, surface, vendeur), m_tailleVitrine(tailleVitrine), m_salleDeStockageDeMateriaux(salleDeStockageDeMateriaux)
+LocalProfessionnel::LocalProfessionnel(unsigned short tailleVitrine, bool salleDeStockageDeMateriaux, unsigned int prix, std::string adresse, short surface, Vendeur vendeur)
+    :BienImmobilier(prix, adresse, surface, vendeur), m_tailleVitrine(tailleVitrine), m_salleDeStockageDeMateriaux(salleDeStockageDeMateriaux)
 {
 }
 
-bool ProfessionalLocal::getSalleDeStockage() const
+bool LocalProfessionnel::getSalleDeStockage() const
 {
     return m_salleDeStockageDeMateriaux;
 }
 
-std::string ProfessionalLocal::getType() const
+std::string LocalProfessionnel::getType() const
 {
     return "professional local";
 }
 
-char ProfessionalLocal::getSauvegardeType() const
+char LocalProfessionnel::getSauvegardeType() const
 {
     return 'l';
 }
 
-unsigned short ProfessionalLocal::getTailleVitrine() const
+unsigned short LocalProfessionnel::getTailleVitrine() const
 {
     return m_tailleVitrine;
 }
 
-void ProfessionalLocal::setSalleDeStockage(bool newSalleDeStockage)
+void LocalProfessionnel::setSalleDeStockage(bool newSalleDeStockage)
 {
     m_salleDeStockageDeMateriaux = newSalleDeStockage;
 }
-void ProfessionalLocal::setTailleVitrine(int newTailleVitrine)
+void LocalProfessionnel::setTailleVitrine(int newTailleVitrine)
 {
     m_tailleVitrine = newTailleVitrine;
 }

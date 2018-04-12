@@ -45,15 +45,15 @@ public:
     void supprimerBienImmobilier();
 
     void rechercheBienImmobilier();
-    std::vector<choixBienImmobilier> rechercheBienImmobilierAvecSuperficie(int superficieMin, int superficieMax);
-    std::vector<choixBienImmobilier> rechercheBienImmobilierAvecType(char bienImmobilierType);
-    std::vector<choixBienImmobilier> rechercheBienImmobilierAvecBudget(unsigned int budget);
+    std::vector<BienImmobilier> rechercheBienImmobilierAvecSuperficie(int superficieMin, int superficieMax);
+    std::vector<BienImmobilier> rechercheBienImmobilierAvecType(char bienImmobilierType);
+    std::vector<BienImmobilier> rechercheBienImmobilierAvecBudget(unsigned int budget);
 
     bool estNombre(std::string str);
 
     Vendeur choixVendeur();
     Acheteur choixAcheteur();
-    choixBienImmobilier chooseRealEstate(Vendeur s);
+    BienImmobilier chooseRealEstate(Vendeur s);
 };
 
 #endif // USERINTERFACE_H

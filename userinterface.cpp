@@ -86,13 +86,13 @@ Acheteur UserInterface::choixAcheteur()
     return m_agence->getAcheteurs()[std::stoi(choix)-1];
 }
 
-choixBienImmobilier UserInterface::chooseRealEstate(Vendeur s)
+BienImmobilier UserInterface::chooseRealEstate(Vendeur s)
 {
     //Affiche tout les biens immobiliers du vendeur
     int i = 1;
     std::string choix;
-    std::vector <choixBienImmobilier> vre;
-    for (std::pair<choixBienImmobilier*, Vendeur> re : m_agence->getBienImmobiliers())
+    std::vector <BienImmobilier> vre;
+    for (std::pair<BienImmobilier*, Vendeur> re : m_agence->getBienImmobiliers())
     {
         if (re.second.getId() == s.getId())
         {
@@ -256,7 +256,7 @@ void UserInterface::ajoutBienImmobilier()
             std::cin >> stringSalleDeStockage;
             salleDeStockage = std::stoi(stringSalleDeStockage);
 
-            ProfessionalLocal *pl = new ProfessionalLocal(std::stoi(tailleVitrine), salleDeStockage, std::stoi(prix),adresse, std::stoi(surface), vendeur);
+            LocalProfessionnel *pl = new LocalProfessionnel(std::stoi(tailleVitrine), salleDeStockage, std::stoi(prix),adresse, std::stoi(surface), vendeur);
             m_agence->ajoutBienImmobilier(vendeur, pl);
             break;
         }
@@ -283,7 +283,7 @@ void UserInterface::declarerVisite()
     } else {
         Acheteur b;
         Vendeur s;
-        choixBienImmobilier re;
+        BienImmobilier re;
         b = choixAcheteur();
         s = choixVendeur();
         re = chooseRealEstate(s);
@@ -367,7 +367,7 @@ void UserInterface::afficherBienImmobiliers() const
     {
         std::cout << "Il n'y a pas de bien immobilier" << std::endl;
     } else {
-        for (std::pair<choixBienImmobilier*,Client> re : this->m_agence->getBienImmobiliers())
+        for (std::pair<BienImmobilier*,Client> re : this->m_agence->getBienImmobiliers())
         {
             std::cout << "L' " << re.first->getType() << " n°" << re.first->getIdentifiant() << " est disponible pour";
             std::cout << re.first->getPrix() << "€ et vendue par " << re.first->getVendeur().getPrenom();
@@ -377,10 +377,10 @@ void UserInterface::afficherBienImmobiliers() const
     }
 }
 
-std::vector<choixBienImmobilier> UserInterface::rechercheBienImmobilierAvecSuperficie(int superficieMin, int superficieMax)
+std::vector<BienImmobilier> UserInterface::rechercheBienImmobilierAvecSuperficie(int superficieMin, int superficieMax)
 {
-    std::vector<choixBienImmobilier> resultat;
-    for(std::pair<choixBienImmobilier*,Vendeur> it : m_agence->getBienImmobiliers())
+    std::vector<BienImmobilier> resultat;
+    for(std::pair<BienImmobilier*,Vendeur> it : m_agence->getBienImmobiliers())
     {
         if(it.first->getSurface() <= superficieMax && it.first->getSurface() >= superficieMin)
         {
@@ -390,10 +390,10 @@ std::vector<choixBienImmobilier> UserInterface::rechercheBienImmobilierAvecSuper
     return resultat;
 }
 
-std::vector<choixBienImmobilier> UserInterface::rechercheBienImmobilierAvecType(char bienImmobilierType)
+std::vector<BienImmobilier> UserInterface::rechercheBienImmobilierAvecType(char bienImmobilierType)
 {
-    std::vector<choixBienImmobilier> resultat;
-    for(std::pair<choixBienImmobilier*,Vendeur> it : m_agence->getBienImmobiliers())
+    std::vector<BienImmobilier> resultat;
+    for(std::pair<BienImmobilier*,Vendeur> it : m_agence->getBienImmobiliers())
     {
         if(it.first->getSauvegardeType() == bienImmobilierType)
         {
@@ -403,10 +403,10 @@ std::vector<choixBienImmobilier> UserInterface::rechercheBienImmobilierAvecType(
     return resultat;
 }
 
-std::vector<choixBienImmobilier> UserInterface::rechercheBienImmobilierAvecBudget(unsigned int budget)
+std::vector<BienImmobilier> UserInterface::rechercheBienImmobilierAvecBudget(unsigned int budget)
 {
-    std::vector<choixBienImmobilier> resultat;
-    for(std::pair<choixBienImmobilier*,Vendeur> it : m_agence->getBienImmobiliers())
+    std::vector<BienImmobilier> resultat;
+    for(std::pair<BienImmobilier*,Vendeur> it : m_agence->getBienImmobiliers())
     {
         if(it.first->getPrix() <= budget)
         {
@@ -424,7 +424,7 @@ void UserInterface::rechercheBienImmobilier()
     //Ask for type of real estate (or various)
     //Ask for superficy min max
     //Ask for typical stuff related to the type chosen (Example : A balcony for a Flat)
-    std::vector<choixBienImmobilier> resultatRecherche;
+    std::vector<BienImmobilier> resultatRecherche;
     unsigned int budget;
     std::string superficieMin;
     std::string superficieMax;
@@ -475,7 +475,7 @@ void UserInterface::rechercheBienImmobilier()
         std::cout << "Désolé votre requête n'a pas été reconnu, veuillez en effectuer une nouvelle" << std::endl;
     }
 
-    for(choixBienImmobilier re : resultatRecherche) {
+    for(BienImmobilier re : resultatRecherche) {
         std::cout << "L' " << re.getType() << " n°" << re.getIdentifiant() << " est disponible pour";
         std::cout << re.getPrix() << "€ et est vendu par " << re.getVendeur().getPrenom();
         std::cout << " " << re.getVendeur().getNom() << std::endl;

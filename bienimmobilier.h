@@ -3,7 +3,7 @@
 
 #include "vendeur.h"
 
-class choixBienImmobilier
+class BienImmobilier
 {
 protected:
     static int nextId;
@@ -14,9 +14,9 @@ protected:
     int m_identifiant;
 public:
     //Constructors
-    choixBienImmobilier() = default;
-    choixBienImmobilier(const choixBienImmobilier & re);
-    choixBienImmobilier(unsigned int prix, std::string addresse, unsigned short surface, Vendeur vendeur);
+    BienImmobilier() = default;
+    BienImmobilier(const BienImmobilier & re);
+    BienImmobilier(unsigned int prix, std::string addresse, unsigned short surface, Vendeur vendeur);
 
     //Getters
     unsigned int getPrix() const;
@@ -31,8 +31,8 @@ public:
     //Setters
 
     //Operator
-    bool operator<(const choixBienImmobilier & re) const;
-    bool operator ==(const choixBienImmobilier & re) const;
+    bool operator<(const BienImmobilier & re) const;
+    bool operator ==(const BienImmobilier & re) const;
 
     //Autres
     virtual void afficher() const;

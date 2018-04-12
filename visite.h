@@ -12,21 +12,21 @@ class Visite
 private:
     Acheteur m_acheteur;
     Vendeur m_vendeur;
-    choixBienImmobilier m_re;
+    BienImmobilier m_re;
 public:
     //Constructors
     Visite() = delete;
-    Visite(Acheteur b, Vendeur s, choixBienImmobilier re);
+    Visite(Acheteur b, Vendeur s, BienImmobilier re);
 
     //Getters
     Acheteur getAcheteur() const;
     Vendeur getVendeur() const;
-    choixBienImmobilier getBienImmobilier() const;
+    BienImmobilier getBienImmobilier() const;
 
     //Setters
     void setAcheteur(Acheteur newAcheteur);
     void setVendeur(Vendeur newVendeur);
-    void setBienImmobilier(choixBienImmobilier newBienImmobilier);
+    void setBienImmobilier(BienImmobilier newBienImmobilier);
 
     //Operators
     bool operator<(Visite const& v) const;

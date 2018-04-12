@@ -4,7 +4,7 @@
 #include <iostream>
 #include "bienimmobilier.h"
 
-class Terrain : public choixBienImmobilier
+class Terrain : public BienImmobilier
 {
 private:
     bool m_constructible;

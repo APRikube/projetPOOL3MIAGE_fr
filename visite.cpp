@@ -1,6 +1,6 @@
 #include "visite.h"
 
-Visite::Visite(Acheteur b, Vendeur s, choixBienImmobilier re)
+Visite::Visite(Acheteur b, Vendeur s, BienImmobilier re)
     :m_acheteur(b), m_vendeur(s), m_re(re)
 {
 }
@@ -15,7 +15,7 @@ Vendeur Visite::getVendeur() const
     return m_vendeur;
 }
 
-choixBienImmobilier Visite::getBienImmobilier() const
+BienImmobilier Visite::getBienImmobilier() const
 {
     return m_re;
 }
@@ -30,7 +30,7 @@ void Visite::setVendeur(Vendeur newVendeur)
     m_vendeur = newVendeur;
 }
 
-void Visite::setBienImmobilier(choixBienImmobilier newBienImmobilier)
+void Visite::setBienImmobilier(BienImmobilier newBienImmobilier)
 {
     m_re = newBienImmobilier;
 }

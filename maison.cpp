@@ -1,7 +1,7 @@
 #include "maison.h"
 
 Maison::Maison(std::string adresse, short surface, unsigned int prix, Vendeur seller, unsigned short nbSalles, bool piscine, bool garage)
-    :choixBienImmobilier(prix, adresse, surface, seller), m_nbSalles(nbSalles), m_piscine(piscine), m_garage(garage)
+    :BienImmobilier(prix, adresse, surface, seller), m_nbSalles(nbSalles), m_piscine(piscine), m_garage(garage)
 {
 
 }

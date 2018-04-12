@@ -5,7 +5,7 @@ std::vector<Client> Agence::getClients() const
     return m_clients;
 }
 
-std::map<choixBienImmobilier*, Vendeur> Agence::getBienImmobiliers() const
+std::map<BienImmobilier*, Vendeur> Agence::getBienImmobiliers() const
 {
     return m_bienImmobiliers;
 }
@@ -15,12 +15,12 @@ void Agence::ajoutClient(Client &client)
     m_clients.push_back(client);
 }
 
-void Agence::ajoutBienImmobilier(Vendeur &vendeur, choixBienImmobilier *bienImmobilier)
+void Agence::ajoutBienImmobilier(Vendeur &vendeur, BienImmobilier *bienImmobilier)
 {
     m_bienImmobiliers.insert(std::make_pair(bienImmobilier, vendeur));
 }
 
-void Agence::vendre(choixBienImmobilier re)
+void Agence::vendre(BienImmobilier re)
 {
     m_bienImmobiliers.erase(m_bienImmobiliers.find(&re));
     std::cout << "Bien immobilier vendu" << std::endl;
@@ -65,7 +65,7 @@ void Agence::sauvegardeBienImmobiliers()
 {
     std::ofstream fichier_bienImmobilier("../save/realEstates.txt", std::ios::out | std::ios::trunc);
     if(fichier_bienImmobilier) {
-        for (std::pair<choixBienImmobilier*,Client> b : m_bienImmobiliers) {
+        for (std::pair<BienImmobilier*,Client> b : m_bienImmobiliers) {
             if(b.first->getSauvegardeType() == 'a') {
                 Appartement *f = dynamic_cast<Appartement*>(b.first);
                 fichier_bienImmobilier << "a:" << f->getAdresse() << ":" << f->getSurface() << ":" << f->getPrix() << ":"
@@ -74,7 +74,7 @@ void Agence::sauvegardeBienImmobiliers()
                                  << ":" << f->getBalcon() << ":" << f->getNbAppartBatiment();
 
             } else if(b.first->getSauvegardeType() == 'l') {
-                ProfessionalLocal *pl = dynamic_cast<ProfessionalLocal*>(b.first);
+                LocalProfessionnel *pl = dynamic_cast<LocalProfessionnel*>(b.first);
                 fichier_bienImmobilier << "l:" << pl->getTailleVitrine() << ":" << pl->getSalleDeStockage()
                                  << ":" << pl->getPrix() << ":" << pl->getAdresse() << ":" << pl->getSurface()
                                  << ":" << pl->getVendeur().getId();
@@ -90,8 +90,6 @@ void Agence::sauvegardeBienImmobiliers()
                 fichier_bienImmobilier << "t:" << p->getPrix() << ":" << p->getAdresse() << ":" << p->getSurface() << ":"
                                  << p->getVendeur().getId() << ":" << p->getConstructible();
 
-            } else {
-                //comportement en cas d'erreur ?
             }
         }
     }
@@ -141,10 +139,32 @@ void Agence::ouvertureAcheteurs()
     }
 }
 
-Appartement Agence::ouvertureAppartement(std::vector<std::string> infos)
+void Agence::ouvertureAppartement(std::vector<std::string> infos)
 {
-    Appartement f(infos[1], std::stoi(infos[2]), std::stoi(infos[3]), trouverVendeur(infos[4]), std::stoi(infos[5]), std::stoi(infos[6]), std::stoi(infos[7]), std::stoi(infos[8]), std::stoi(infos[9]), std::stoi(infos[10]));
-    return f;
+    Vendeur v = trouverVendeur(infos[4]);
+    Appartement *a = new Appartement(infos[1], std::stoi(infos[2]), std::stoi(infos[3]), trouverVendeur(infos[4]), std::stoi(infos[5]), std::stoi(infos[6]), std::stoi(infos[7]), std::stoi(infos[8]), std::stoi(infos[9]), std::stoi(infos[10]));
+    ajoutBienImmobilier(v, a);
+}
+
+void Agence::ouvertureLocalProfessionnel(std::vector<std::string> infos)
+{
+    Vendeur v = trouverVendeur(infos[6]);
+    LocalProfessionnel *lp = new LocalProfessionnel(std::stoi(infos[1]), std::stoi(infos[2]), std::stoi(infos[3]), infos[4], std::stoi(infos[5]), v);
+    ajoutBienImmobilier(v, lp);
+}
+
+void Agence::ouvertureMaison(std::vector<std::string> infos)
+{
+    Vendeur v = trouverVendeur(infos[4]);
+    Maison *m = new Maison(infos[1], std::stoi(infos[2]), std::stoi(infos[3]), v, std::stoi(infos[5]), std::stoi(infos[6]), std::stoi(infos[7]));
+    ajoutBienImmobilier(v, m);
+}
+
+void Agence::ouvertureTerrains(std::vector<std::string> infos)
+{
+    Vendeur v = trouverVendeur(infos[5]);
+    Terrain *t = new Terrain(std::stoi(infos[1]),std::stoi(infos[2]), infos[3], std::stoi(infos[4]), v);
+    ajoutBienImmobilier(v, t);
 }
 
 void Agence::ouvertureBienImmobiliers()
@@ -153,23 +173,16 @@ void Agence::ouvertureBienImmobiliers()
     if(fichier_bienImmbilier) {
         std::string contenu;
         while(std::getline(fichier_bienImmbilier, contenu)) {
-            std::vector<std::string> bienImmobilier_infos = separation(contenu,':');
-            if(bienImmobilier_infos[0] == "a")
-            {
-                ouvertureAppartement(bienImmobilier_infos);
-                //ouvrir appartement
-            } else if(bienImmobilier_infos[0] == "l") {
-                //ouvrir local professionnel
-            } else if(bienImmobilier_infos[0] == "m") {
-                //ouvrir maison
-            } else if(bienImmobilier_infos[0] == "t") {
-                //open terrain
-            } else {
-                //Comportement en cas d'erreur ?
+            std::vector<std::string> bienImmobiliersinfos = separation(contenu,':');
+            if(bienImmobiliersinfos[0] == "a"){
+                ouvertureAppartement(bienImmobiliersinfos);
+            } else if(bienImmobiliersinfos[0] == "l") {
+                ouvertureLocalProfessionnel(bienImmobiliersinfos);
+            } else if(bienImmobiliersinfos[0] == "m") {
+                ouvertureMaison(bienImmobiliersinfos);
+            } else if(bienImmobiliersinfos[0] == "t") {
+                ouvertureTerrains(bienImmobiliersinfos);
             }
-
-
-
         }
     } else {
         std::cerr << "Impossible d'ouvrir buyers.txt" << std::endl;
@@ -273,7 +286,7 @@ void Agence::suppressionVendeur()
         std::cin >> choix;
     } while (!estNombre(choix) && (unsigned int)std::stoi(choix) > m_vendeurs.size());
     //Supprimer tout les bien immobiliers
-    for (std::pair<choixBienImmobilier*, Vendeur> pre : m_bienImmobiliers)
+    for (std::pair<BienImmobilier*, Vendeur> pre : m_bienImmobiliers)
     {
         if (pre.second.getId() == m_vendeurs[std::stoi(choix) - 1].getId())
         {
@@ -284,7 +297,7 @@ void Agence::suppressionVendeur()
     m_vendeurs.erase(m_vendeurs.begin()+std::stoi(choix) - 1);
 }
 
-void Agence::suppressionBienImmobilier(choixBienImmobilier re)
+void Agence::suppressionBienImmobilier(BienImmobilier re)
 {
     m_bienImmobiliers.erase(m_bienImmobiliers.find(&re));
 }

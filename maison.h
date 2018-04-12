@@ -4,7 +4,7 @@
 #include <iostream>
 #include "bienimmobilier.h"
 
-class Maison : public choixBienImmobilier
+class Maison : public BienImmobilier
 {
 private:
     unsigned short m_nbSalles;

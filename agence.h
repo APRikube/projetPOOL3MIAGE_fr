@@ -22,27 +22,27 @@ private:
     std::vector<Client> m_clients;
     std::vector<Vendeur> m_vendeurs;
     std::vector<Acheteur> m_acheteur;
-    std::map<choixBienImmobilier*, Vendeur> m_bienImmobiliers;
+    std::map<BienImmobilier*, Vendeur> m_bienImmobiliers;
 public:
     //Constructors
     Agence() = default;
 
     //Getters
     std::vector<Client> getClients() const;
-    std::map<choixBienImmobilier *, Vendeur> getBienImmobiliers() const;
+    std::map<BienImmobilier *, Vendeur> getBienImmobiliers() const;
     std::vector<Vendeur> getVendeurs() const;
     std::vector<Acheteur> getAcheteurs() const;
     //Setters
 
     //Other Methods
     void ajoutClient(Client &client);
-    void ajoutBienImmobilier(Vendeur &vendeur, choixBienImmobilier *bienImmobilier);
+    void ajoutBienImmobilier(Vendeur &vendeur, BienImmobilier *bienImmobilier);
     void ajoutAcheteur(Acheteur &b);
     void ajoutVendeur(Vendeur &s);
     void suppressionAcheteur();
     void suppressionVendeur();
-    void suppressionBienImmobilier(choixBienImmobilier re);
-    void vendre(choixBienImmobilier re);
+    void suppressionBienImmobilier(BienImmobilier re);
+    void vendre(BienImmobilier re);
 
     //save methods
     void sauvegarde();
@@ -53,7 +53,10 @@ public:
     //Autre méthodes
     void ouvertureVendeurs();
     void ouvertureAcheteurs();
-    Appartement ouvertureAppartement(std::vector<std::string> infos);
+    void ouvertureAppartement(std::vector<std::string> infos);
+    void ouvertureLocalProfessionnel(std::vector<std::string> infos);
+    void ouvertureMaison(std::vector<std::string> infos);
+    void ouvertureTerrains(std::vector<std::string> infos);
     void ouvertureBienImmobiliers();
     void ouverture();
     std::vector<std::string> separation(std::string stringASeparer, char separateur);

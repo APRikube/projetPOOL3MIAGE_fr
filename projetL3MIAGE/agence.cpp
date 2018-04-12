@@ -144,7 +144,7 @@ void Agence::ouvertureAcheteurs()
 void Agence::ouvertureAppartement(std::vector<std::string> infos)
 {
     Vendeur v = trouverVendeur(infos[4]);
-    Appartement *a = new Appartement(infos[1], std::stoi(infos[2]), std::stoi(infos[3]), trouverVendeur(infos[4]), std::stoi(infos[5]), std::stoi(infos[6]), std::stoi(infos[7]), std::stoi(infos[8]), std::stoi(infos[9]), std::stoi(infos[10]));
+    Appartement *a = new Appartement(infos[1], std::stoi(infos[2]), std::stoi(infos[3]), v, std::stoi(infos[5]), std::stoi(infos[6]), std::stoi(infos[7]), std::stoi(infos[8]), std::stoi(infos[9]), std::stoi(infos[10]));
     ajoutBienImmobilier(v, a);
 }
 

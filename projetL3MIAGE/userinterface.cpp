@@ -139,7 +139,7 @@ void UserInterface::ajoutBienImmobilier()
         std::string surface;
         Vendeur vendeur;
 
-        std::cout << "Quel est le type du bien immobilier?" << std::endl;
+        std::cout << "Quel est le type du bien immobilier ?" << std::endl;
         std::cout << "1) Appartement" << std::endl;
         std::cout << "2) Maison" << std::endl;
         std::cout << "3) Terrain" << std::endl;
@@ -148,19 +148,20 @@ void UserInterface::ajoutBienImmobilier()
             std::cin >> type;
         } while(!estNombre(type) || (std::stoi(type) > 4) || (std::stoi(type) == 0));
 
-        std::cout << "Quel est le prix du bien immobilier?" << std::endl;
+        std::cout << "Quel est le prix du bien immobilier ?" << std::endl;
         do {
             std::getline(std::cin, prix);
         } while (!estNombre(prix));
 
-        std::cout << "Quel est l'adresse du bien immobilier?" << std::endl;
+        std::cout << "Quel est l'adresse du bien immobilier ?" << std::endl;
         std::getline(std::cin, adresse);
 
-        std::cout << "Quel est la surface de ce bien immobilier?" << std::endl;
+        std::cout << "Quel est la surface de ce bien immobilier ?" << std::endl;
         do {
             std::cin >> surface;
         }  while (!estNombre(surface));
 
+        std::cout << "Qui en est le vendeur ?" << std::endl;
         vendeur = choixVendeur();
 
         switch (std::stoi(type))
@@ -168,7 +169,7 @@ void UserInterface::ajoutBienImmobilier()
         case 1:
         {
             std::string salles;
-            std::cout << "De combien de salles est composés l'appartement?" << std::endl;
+            std::cout << "De combien de salles est composés l'appartement ?" << std::endl;
             do {
                 std::cin >> salles;
             } while (!estNombre(salles));
@@ -369,8 +370,8 @@ void UserInterface::afficherBienImmobiliers() const
     } else {
         for (std::pair<BienImmobilier*,Client> re : this->m_agence->getBienImmobiliers())
         {
-            std::cout << "L' " << re.first->getType() << " n°" << re.first->getIdentifiant() << " est disponible pour";
-            std::cout << re.first->getPrix() << "€ et vendue par " << re.first->getVendeur().getPrenom();
+            std::cout << "L'" << re.first->getType() << " n° " << re.first->getIdentifiant() << " est disponible pour ";
+            std::cout << re.first->getPrix() << "€ et vendu par " << re.first->getVendeur().getPrenom();
             std::cout << " " << re.first->getVendeur().getNom() << std::endl;
             re.first->afficher();
         }
@@ -419,11 +420,6 @@ std::vector<BienImmobilier> UserInterface::rechercheBienImmobilierAvecBudget(uns
 
 void UserInterface::rechercheBienImmobilier()
 {
-
-    //Ask for budget max
-    //Ask for type of real estate (or various)
-    //Ask for superficy min max
-    //Ask for typical stuff related to the type chosen (Example : A balcony for a Flat)
     std::vector<BienImmobilier> resultatRecherche;
     unsigned int budget;
     std::string superficieMin;
@@ -515,11 +511,13 @@ void UserInterface::lire()
         }
         else if (m_requete == "1")
         {
+            system("clear");
             ajoutClient();
             system("clear");
         }
         else if (m_requete == "2")
         {
+            system("clear");
             ajoutBienImmobilier();
             system("clear");
         }

@@ -28,7 +28,7 @@ std::string Client::getAdresse() const
 
 int Client::getId() const
 {
-    return m_id;
+    return m_identifiant;
 }
 
 void Client::setNom(std::string newNom)

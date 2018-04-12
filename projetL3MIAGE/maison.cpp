@@ -38,7 +38,7 @@ void Maison::setGarage(bool has)
 
 std::string Maison::getType() const
 {
-    return "house";
+    return "maison";
 }
 
 char Maison::getSauvegardeType() const

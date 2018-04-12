@@ -9,7 +9,7 @@ Terrain::Terrain(bool constructible, unsigned int prix, std::string adresse, sho
 
 std::string Terrain::getType() const
 {
-    return "plot";
+    return "terrain";
 }
 
 char Terrain::getSauvegardeType() const

@@ -17,7 +17,7 @@ bool LocalProfessionnel::getSalleDeStockage() const
 
 std::string LocalProfessionnel::getType() const
 {
-    return "professional local";
+    return "local professionnel";
 }
 
 char LocalProfessionnel::getSauvegardeType() const

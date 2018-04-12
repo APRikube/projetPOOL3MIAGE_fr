@@ -8,7 +8,7 @@ Appartement::Appartement(std::string addresse, short surface, unsigned int prix,
 
 std::string Appartement::getType() const
 {
-    return "flat";
+    return "appartement";
 }
 
 char Appartement::getSauvegardeType() const
@@ -78,11 +78,10 @@ void Appartement::setNbAppartBatiment(unsigned int newNbAppartBatiment)
 
 void Appartement::afficher() const
 {
-    std::cout << "C'est un appartement vendu par " << m_vendeur.getPrenom() << " " << m_vendeur.getNom() << std::endl;
     std::cout << "L'appartement est localisé à " << m_adresse << std::endl;
     std::cout << "Il est vendu pour " << m_prix << "€" << std::endl;
     std::cout << "Ca surface " << m_surface << " est divisé en " << m_nbSalles << " salles." << std::endl;
-    std::cout << "Il est à l'étage n° " << m_etage << std::endl;
+    std::cout << "Il est à l'étage n° " << m_etage << std::endl << std::endl;
     if (m_garage)
     {
         std::cout << "Il a un garage." << std::endl;

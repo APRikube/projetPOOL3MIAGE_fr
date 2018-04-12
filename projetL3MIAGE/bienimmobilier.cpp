@@ -45,12 +45,12 @@ int BienImmobilier::getIdentifiant() const
 
 std::string BienImmobilier::getType() const
 {
-    return "real estate";
+    return "bien immobilier";
 }
 
 char BienImmobilier::getSauvegardeType() const
 {
-    return 'r';
+    return 'b';
 }
 
 bool BienImmobilier::operator<(const BienImmobilier & re) const

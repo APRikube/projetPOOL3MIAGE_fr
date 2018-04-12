@@ -1,5 +1,7 @@
 #include "userinterface.h"
 
+using namespace std;
+
 UserInterface::UserInterface(Agence *agence)
     :m_quitter(false),m_retourAuMenu(false),m_agence(agence)
 {
@@ -13,22 +15,22 @@ bool UserInterface::estValider() const
 
 void UserInterface::ajoutClient()
 {
-    std::string nom;
-    std::string prenom;
-    std::string adresse;
-    std::string type;
+    string nom;
+    string prenom;
+    string adresse;
+    string type;
 
-    std::cout << "Quel est le nom du nouveau client?" << std::endl;
-    std::cin.ignore();
-    std::getline(std::cin, nom);
-    std::cout << "Quel est le prénom du nouveau client?" << std::endl;
-    std::getline(std::cin, prenom);
-    std::cout << "Quel est l'adresse du nouveau client?" << std::endl;
-    std::getline(std::cin, adresse);
+    cout << "Quel est le nom du nouveau client?" << endl;
+    cin.ignore();
+    getline(cin, nom);
+    cout << "Quel est le prénom du nouveau client?" << endl;
+    getline(cin, prenom);
+    cout << "Quel est l'adresse du nouveau client?" << endl;
+    getline(cin, adresse);
 
-    std::cout << "Est-ce que le nouveau client veut acheter un bien immobilier (appuyer sur 1 et valider) ou bien en vendre un (appuer sur 2 et valider)?" << std::endl;
+    cout << "Est-ce que le nouveau client veut acheter un bien immobilier (appuyer sur 1 et valider) ou bien en vendre un (appuer sur 2 et valider)?" << endl;
     do {
-        std::cin >> type;
+        cin >> type;
     } while (type != "1" && type != "2");
 
     if (type == "1")
@@ -47,10 +49,10 @@ void UserInterface::ajoutClient()
         m_agence->ajoutVendeur(s);
         m_agence->sauvegarde();
     }
-    std::cout << "Client ajouté !" << std::endl;
+    cout << "Client ajouté !" << endl;
 }
 
-bool UserInterface::estNombre(std::string str)
+bool UserInterface::estNombre(string str)
 {
     if (str.length()==0)
     {
@@ -60,7 +62,7 @@ bool UserInterface::estNombre(std::string str)
     {
         if (str[i] < '0' || str[i] > '9')
         {
-            std::cout << "A nombre est requis" << std::endl;
+            cout << "A nombre est requis" << endl;
             return false;
         }
     }
@@ -70,194 +72,194 @@ bool UserInterface::estNombre(std::string str)
 Acheteur UserInterface::choixAcheteur()
 {
     int i = 1;
-    std::string choix;
+    string choix;
     //Afficher les acheteurs disponibles
     for (Acheteur b : m_agence->getAcheteurs())
     {
-        std::cout << i << ") " << b.getPrenom() << " " << b.getNom() << std::endl;
+        cout << i << ") " << b.getPrenom() << " " << b.getNom() << endl;
         ++i;
     }
 
     //Recupère les valeurs entrées au clavier
     do {
-        std::cin >> choix;
-    } while (!estNombre(choix) && (unsigned int)std::stoi(choix) > m_agence->getAcheteurs().size());
+        cin >> choix;
+    } while (!estNombre(choix) && (unsigned int)stoi(choix) > m_agence->getAcheteurs().size());
 
-    return m_agence->getAcheteurs()[std::stoi(choix)-1];
+    return m_agence->getAcheteurs()[stoi(choix)-1];
 }
 
 BienImmobilier UserInterface::chooseRealEstate(Vendeur s)
 {
     //Affiche tout les biens immobiliers du vendeur
     int i = 1;
-    std::string choix;
-    std::vector <BienImmobilier> vre;
-    for (std::pair<BienImmobilier*, Vendeur> re : m_agence->getBienImmobiliers())
+    string choix;
+    vector <BienImmobilier> vre;
+    for (pair<BienImmobilier*, Vendeur> re : m_agence->getBienImmobiliers())
     {
         if (re.second.getId() == s.getId())
         {
-            std::cout << i << ") " << re.first->getAdresse() << " : " << re.first->getPrix() << " ; " << re.first->getSurface() << std::endl;
+            cout << i << ") " << re.first->getAdresse() << " : " << re.first->getPrix() << " ; " << re.first->getSurface() << endl;
             vre.push_back(*re.first);
         }
     }
     //Récupère le choix de l'utilisateur
     do {
-        std::cin >> choix;
-    } while (!estNombre(choix) && (unsigned int)std::stoi(choix) > m_agence->getBienImmobiliers().size());
+        cin >> choix;
+    } while (!estNombre(choix) && (unsigned int)stoi(choix) > m_agence->getBienImmobiliers().size());
 
-    return vre[std::stoi(choix)-1];
+    return vre[stoi(choix)-1];
 }
 
 Vendeur UserInterface::choixVendeur()
 {
     int i = 1;
-    std::string choix;
+    string choix;
     //Affiche les vendeurs disponible
     for (Vendeur s : m_agence->getVendeurs())
     {
-        std::cout << i << ") " << s.getPrenom() << " " << s.getNom() << std::endl;
+        cout << i << ") " << s.getPrenom() << " " << s.getNom() << endl;
         ++i;
     }
 
     //Lis les valeurs entrées au clavier
     do {
-        std::cin >> choix;
-    } while (!estNombre(choix) && (unsigned int)std::stoi(choix) > m_agence->getVendeurs().size());
+        cin >> choix;
+    } while (!estNombre(choix) && (unsigned int)stoi(choix) > m_agence->getVendeurs().size());
 
-    return m_agence->getVendeurs()[std::stoi(choix)-1];
+    return m_agence->getVendeurs()[stoi(choix)-1];
 }
 
 void UserInterface::ajoutBienImmobilier()
 {
     if (m_agence->getVendeurs().size() == 0)
     {
-        std::cout << "Il n'y a pas de vendeur, vous ne pouvez pas ajouter de bien immobilier." << std::endl;
+        cout << "Il n'y a pas de vendeur, vous ne pouvez pas ajouter de bien immobilier." << endl;
     } else {
-        std::string type;
-        std::string prix;
-        std::string adresse;
-        std::string surface;
+        string type;
+        string prix;
+        string adresse;
+        string surface;
         Vendeur vendeur;
 
-        std::cout << "Quel est le type du bien immobilier ?" << std::endl;
-        std::cout << "1) Appartement" << std::endl;
-        std::cout << "2) Maison" << std::endl;
-        std::cout << "3) Terrain" << std::endl;
-        std::cout << "4) Local professionnel" << std::endl;
+        cout << "Quel est le type du bien immobilier ?" << endl;
+        cout << "1) Appartement" << endl;
+        cout << "2) Maison" << endl;
+        cout << "3) Terrain" << endl;
+        cout << "4) Local professionnel" << endl;
         do {
-            std::cin >> type;
-        } while(!estNombre(type) || (std::stoi(type) > 4) || (std::stoi(type) == 0));
+            cin >> type;
+        } while(!estNombre(type) || (stoi(type) > 4) || (stoi(type) == 0));
 
-        std::cout << "Quel est le prix du bien immobilier ?" << std::endl;
+        cout << "Quel est le prix du bien immobilier ?" << endl;
         do {
-            std::getline(std::cin, prix);
+            getline(cin, prix);
         } while (!estNombre(prix));
 
-        std::cout << "Quel est l'adresse du bien immobilier ?" << std::endl;
-        std::getline(std::cin, adresse);
+        cout << "Quel est l'adresse du bien immobilier ?" << endl;
+        getline(cin, adresse);
 
-        std::cout << "Quel est la surface de ce bien immobilier ?" << std::endl;
+        cout << "Quel est la surface de ce bien immobilier ?" << endl;
         do {
-            std::cin >> surface;
+            cin >> surface;
         }  while (!estNombre(surface));
 
-        std::cout << "Qui en est le vendeur ?" << std::endl;
+        cout << "Qui en est le vendeur ?" << endl;
         vendeur = choixVendeur();
 
-        switch (std::stoi(type))
+        switch (stoi(type))
         {
         case 1:
         {
-            std::string salles;
-            std::cout << "De combien de salles est composés l'appartement ?" << std::endl;
+            string salles;
+            cout << "De combien de salles est composés l'appartement ?" << endl;
             do {
-                std::cin >> salles;
+                cin >> salles;
             } while (!estNombre(salles));
 
-            std::string etage;
-            std::cout << "A quel étage se trouve l'appartement? (Pour le rez de chaussé, appuyer sur 0)" << std::endl;
+            string etage;
+            cout << "A quel étage se trouve l'appartement? (Pour le rez de chaussé, appuyer sur 0)" << endl;
             do {
-                std::cin >> etage;
+                cin >> etage;
             } while (!estNombre(etage));
 
             bool garage;
-            std::string stringGarage;
-            std::cout << "L'appartement a-t-il un garage? (1 pour oui, 0 pour non)" << std::endl;
-            std::cin >> stringGarage;
-            garage = std::stoi(stringGarage);
+            string stringGarage;
+            cout << "L'appartement a-t-il un garage? (1 pour oui, 0 pour non)" << endl;
+            cin >> stringGarage;
+            garage = stoi(stringGarage);
 
             bool cave;
-            std::string stringCave;
-            std::cout << "L'appartement a-t-il une cave? (1 pour oui, 0 pour non)" << std::endl;
-            std::cin >> stringCave;
-            cave = std::stoi(stringCave);
+            string stringCave;
+            cout << "L'appartement a-t-il une cave? (1 pour oui, 0 pour non)" << endl;
+            cin >> stringCave;
+            cave = stoi(stringCave);
 
             bool balcon;
-            std::string stringBalcon;
-            std::cout << "L'appartement a-t-il un balcon? (1 pour oui, 0 pour non)" << std::endl;
-            std::cin >> stringBalcon;
-            balcon = std::stoi(stringBalcon);
+            string stringBalcon;
+            cout << "L'appartement a-t-il un balcon? (1 pour oui, 0 pour non)" << endl;
+            cin >> stringBalcon;
+            balcon = stoi(stringBalcon);
 
-            std::string nbAppartBatiment;
-            std::cout << "De combien d'appartements est composés le bâtiment ?" << std::endl;
+            string nbAppartBatiment;
+            cout << "De combien d'appartements est composés le bâtiment ?" << endl;
             do {
-                std::cin >> nbAppartBatiment;
+                cin >> nbAppartBatiment;
             } while (!estNombre(nbAppartBatiment));
 
-            Appartement *f = new Appartement(adresse, std::stoi(surface), std::stoi(prix), vendeur, std::stoi(salles), std::stoi(etage)
-                   , garage, cave, balcon, std::stoi(nbAppartBatiment));
+            Appartement *f = new Appartement(adresse, stoi(surface), stoi(prix), vendeur, stoi(salles), stoi(etage)
+                   , garage, cave, balcon, stoi(nbAppartBatiment));
             m_agence->ajoutBienImmobilier(vendeur, f);
             break;
         }
         case 2 :
         {
-            std::string nbSalles;
-            std::cout << "De combien de salles est composées la maison?" << std::endl;
+            string nbSalles;
+            cout << "De combien de salles est composées la maison?" << endl;
             do {
-                std::cin >> nbSalles;
+                cin >> nbSalles;
             } while (!estNombre(nbSalles));
 
             bool piscine;
-            std::string stringPiscine;
-            std::cout << "La maison est-elle composée d'une piscine? (1 pour oui, 0 pour non)" << std::endl;
-            std::cin >> stringPiscine;
-            piscine = std::stoi(stringPiscine);
+            string stringPiscine;
+            cout << "La maison est-elle composée d'une piscine? (1 pour oui, 0 pour non)" << endl;
+            cin >> stringPiscine;
+            piscine = stoi(stringPiscine);
 
             bool garage;
-            std::string stringGarage;
-            std::cout << "La maison a-t-elle un garage? (1 pour oui, 0 pour non)" << std::endl;
-            std::cin >> stringGarage;
-            garage = std::stoi(stringGarage);
+            string stringGarage;
+            cout << "La maison a-t-elle un garage? (1 pour oui, 0 pour non)" << endl;
+            cin >> stringGarage;
+            garage = stoi(stringGarage);
 
-            Maison *h = new Maison(adresse, std::stoi(surface), std::stoi(prix), vendeur, std::stoi(nbSalles), piscine, garage);
+            Maison *h = new Maison(adresse, stoi(surface), stoi(prix), vendeur, stoi(nbSalles), piscine, garage);
             m_agence->ajoutBienImmobilier(vendeur, h);
             break;
         }
         case 3:
         {
             bool constructible;
-            std::string stringConstructible;
-            std::cout << "La terrain est-il constructible? (1 pour oui, 0 pour non)"<< std::endl;
-            std::cin >> stringConstructible;
-            constructible = std::stoi(stringConstructible);
+            string stringConstructible;
+            cout << "La terrain est-il constructible? (1 pour oui, 0 pour non)"<< endl;
+            cin >> stringConstructible;
+            constructible = stoi(stringConstructible);
 
-            Terrain *p = new Terrain(constructible, std::stoi(prix), adresse, std::stoi(surface), vendeur);
+            Terrain *p = new Terrain(constructible, stoi(prix), adresse, stoi(surface), vendeur);
             m_agence->ajoutBienImmobilier(vendeur, p);
             break;
         }
         case 4:
         {
-            std::string tailleVitrine;
-            std::cout << "Quel est la taille de la vitrine (En métre carré)?" << std::endl;
-            std::cin >> tailleVitrine;
+            string tailleVitrine;
+            cout << "Quel est la taille de la vitrine (En métre carré)?" << endl;
+            cin >> tailleVitrine;
 
             bool salleDeStockage;
-            std::string stringSalleDeStockage;
-            std::cout << "Le local a-t-il une salle pour stocker le matériels? (1 pour oui, 0 pour non)" << std::endl;
-            std::cin >> stringSalleDeStockage;
-            salleDeStockage = std::stoi(stringSalleDeStockage);
+            string stringSalleDeStockage;
+            cout << "Le local a-t-il une salle pour stocker le matériels? (1 pour oui, 0 pour non)" << endl;
+            cin >> stringSalleDeStockage;
+            salleDeStockage = stoi(stringSalleDeStockage);
 
-            LocalProfessionnel *pl = new LocalProfessionnel(std::stoi(tailleVitrine), salleDeStockage, std::stoi(prix),adresse, std::stoi(surface), vendeur);
+            LocalProfessionnel *pl = new LocalProfessionnel(stoi(tailleVitrine), salleDeStockage, stoi(prix),adresse, stoi(surface), vendeur);
             m_agence->ajoutBienImmobilier(vendeur, pl);
             break;
         }
@@ -274,13 +276,13 @@ void UserInterface::declarerVisite()
 {
     if (m_agence->getAcheteurs().size() == 0)
     {
-        std::cout << "Il n'y a pas d'acheteur, vous ne pouvez pas déclarer de visite." << std::endl;
+        cout << "Il n'y a pas d'acheteur, vous ne pouvez pas déclarer de visite." << endl;
     } else if (m_agence->getVendeurs().size()==0)
     {
-        std::cout << "Il n'y a pas de vendeur, vous ne pouvez pas déclarer de visite" << std::endl;
+        cout << "Il n'y a pas de vendeur, vous ne pouvez pas déclarer de visite" << endl;
     } else if (m_agence->getBienImmobiliers().size() == 0)
     {
-        std::cout << "Il n'y pas de biens immobiliers, vous ne pouvez pas déclarer de visite." << std::endl;
+        cout << "Il n'y pas de biens immobiliers, vous ne pouvez pas déclarer de visite." << endl;
     } else {
         Acheteur b;
         Vendeur s;
@@ -298,30 +300,30 @@ void UserInterface::afficherClients() const
     if (m_agence->getAcheteurs().size() + m_agence->getClients().size() +
             m_agence->getVendeurs().size()==0)
     {
-        std::cout << "Il n'y a pas de clients" << std::endl;
+        cout << "Il n'y a pas de clients" << endl;
     }
     if (m_agence->getVendeurs().size()!=0)
     {
-        std::cout << "Vendeurs : " << std::endl;
+        cout << "Vendeurs : " << endl;
         for (Vendeur s : this->m_agence->getVendeurs())
         {
-            std::cout << s.getPrenom() << " " << s.getNom() << " loge à " << s.getAdresse() << std::endl;
+            cout << s.getPrenom() << " " << s.getNom() << " loge à " << s.getAdresse() << endl;
         }
     }
     if (m_agence->getAcheteurs().size()!=0)
     {
-        std::cout << "Acheteurs : " << std::endl;
+        cout << "Acheteurs : " << endl;
         for (Acheteur b : this->m_agence->getAcheteurs())
         {
-            std::cout << b.getPrenom() << " " << b.getNom() << " loge à " << b.getAdresse() << std::endl;
+            cout << b.getPrenom() << " " << b.getNom() << " loge à " << b.getAdresse() << endl;
         }
     }
     if (m_agence->getClients().size()!=0)
     {
-        std::cout << "Autres clients : " << std::endl;
+        cout << "Autres clients : " << endl;
         for (Client c : this->m_agence->getClients())
         {
-            std::cout << c.getPrenom() << " " << c.getNom() << " loge à " << c.getAdresse() << std::endl;
+            cout << c.getPrenom() << " " << c.getNom() << " loge à " << c.getAdresse() << endl;
         }
     }
 }
@@ -330,7 +332,7 @@ void UserInterface::supprimerAcheteur()
 {
     if (m_agence->getAcheteurs().size() == 0)
     {
-        std::cout << "Il n'y a pas d'acheteur." << std::endl;
+        cout << "Il n'y a pas d'acheteur." << endl;
     }
     else {
         m_agence->suppressionAcheteur();
@@ -342,7 +344,7 @@ void UserInterface::supprimerVendeur()
 {
     if (m_agence->getVendeurs().size()==0)
     {
-        std::cout << "Il n'y a pas de vendeur." << std::endl;
+        cout << "Il n'y a pas de vendeur." << endl;
     }
     else {
         m_agence->suppressionVendeur();
@@ -354,9 +356,9 @@ void UserInterface::supprimerBienImmobilier()
 {
     if (m_agence->getBienImmobiliers().size()==0)
     {
-        std::cout << "Il n'y a pas de bien immobilier" << std::endl;
+        cout << "Il n'y a pas de bien immobilier" << endl;
     } else {
-        std::cout << "Choissisez votre vendeur : " << std::endl;
+        cout << "Choissisez votre vendeur : " << endl;
         m_agence->suppressionBienImmobilier(chooseRealEstate(choixVendeur()));
         m_agence->sauvegarde();
     }
@@ -366,22 +368,22 @@ void UserInterface::afficherBienImmobiliers() const
 {
     if (this->m_agence->getBienImmobiliers().size() == 0)
     {
-        std::cout << "Il n'y a pas de bien immobilier" << std::endl;
+        cout << "Il n'y a pas de bien immobilier" << endl;
     } else {
-        for (std::pair<BienImmobilier*,Client> re : this->m_agence->getBienImmobiliers())
+        for (pair<BienImmobilier*,Client> re : this->m_agence->getBienImmobiliers())
         {
-            std::cout << "L'" << re.first->getType() << " n° " << re.first->getIdentifiant() << " est disponible pour ";
-            std::cout << re.first->getPrix() << "€ et vendu par " << re.first->getVendeur().getPrenom();
-            std::cout << " " << re.first->getVendeur().getNom() << std::endl;
+            cout << "L'" << re.first->getType() << " n° " << re.first->getIdentifiant() << " est disponible pour ";
+            cout << re.first->getPrix() << "€ et vendu par " << re.first->getVendeur().getPrenom();
+            cout << " " << re.first->getVendeur().getNom() << endl;
             re.first->afficher();
         }
     }
 }
 
-std::vector<BienImmobilier> UserInterface::rechercheBienImmobilierAvecSuperficie(int superficieMin, int superficieMax)
+vector<BienImmobilier> UserInterface::rechercheBienImmobilierAvecSuperficie(int superficieMin, int superficieMax)
 {
-    std::vector<BienImmobilier> resultat;
-    for(std::pair<BienImmobilier*,Vendeur> it : m_agence->getBienImmobiliers())
+    vector<BienImmobilier> resultat;
+    for(pair<BienImmobilier*,Vendeur> it : m_agence->getBienImmobiliers())
     {
         if(it.first->getSurface() <= superficieMax && it.first->getSurface() >= superficieMin)
         {
@@ -391,10 +393,10 @@ std::vector<BienImmobilier> UserInterface::rechercheBienImmobilierAvecSuperficie
     return resultat;
 }
 
-std::vector<BienImmobilier> UserInterface::rechercheBienImmobilierAvecType(char bienImmobilierType)
+vector<BienImmobilier> UserInterface::rechercheBienImmobilierAvecType(char bienImmobilierType)
 {
-    std::vector<BienImmobilier> resultat;
-    for(std::pair<BienImmobilier*,Vendeur> it : m_agence->getBienImmobiliers())
+    vector<BienImmobilier> resultat;
+    for(pair<BienImmobilier*,Vendeur> it : m_agence->getBienImmobiliers())
     {
         if(it.first->getSauvegardeType() == bienImmobilierType)
         {
@@ -404,14 +406,14 @@ std::vector<BienImmobilier> UserInterface::rechercheBienImmobilierAvecType(char 
     return resultat;
 }
 
-std::vector<BienImmobilier> UserInterface::rechercheBienImmobilierAvecBudget(unsigned int budget)
+vector<BienImmobilier> UserInterface::rechercheBienImmobilierAvecBudget(unsigned int budget)
 {
-    std::vector<BienImmobilier> resultat;
-    for(std::pair<BienImmobilier*,Vendeur> it : m_agence->getBienImmobiliers())
+    vector<BienImmobilier> resultat;
+    for(pair<BienImmobilier*,Vendeur> it : m_agence->getBienImmobiliers())
     {
         if(it.first->getPrix() <= budget)
         {
-            std::cout << it.first->getPrix() << std::endl;
+            cout << it.first->getPrix() << endl;
             resultat.push_back(*it.first);
         }
     }
@@ -420,17 +422,17 @@ std::vector<BienImmobilier> UserInterface::rechercheBienImmobilierAvecBudget(uns
 
 void UserInterface::rechercheBienImmobilier()
 {
-    std::vector<BienImmobilier> resultatRecherche;
+    vector<BienImmobilier> resultatRecherche;
     unsigned int budget;
-    std::string superficieMin;
-    std::string superficieMax;
+    string superficieMin;
+    string superficieMax;
     char bienImmobilierType;
-    std::cout << "Appuyer sur B et validé pour retourner au menu !" << std::endl;
-    std::cout<< "1) Quel est votre budget max ?" << std::endl;
-    std::cout<< "2) Quel type de bien immobilier recherché vous ?" << std::endl;
-    std::cout<< "3) Quel superficie ?" << std::endl;
+    cout << "Appuyer sur B et validé pour retourner au menu !" << endl;
+    cout<< "1) Quel est votre budget max ?" << endl;
+    cout<< "2) Quel type de bien immobilier recherché vous ?" << endl;
+    cout<< "3) Quel superficie ?" << endl;
 
-    std::cin >> m_recherche;
+    cin >> m_recherche;
 
     if (m_recherche == "b" || m_recherche == "back")
     {
@@ -438,65 +440,65 @@ void UserInterface::rechercheBienImmobilier()
     }
     else if(m_recherche == "1")
     {
-        std::cin >> budget;
+        cin >> budget;
         resultatRecherche = rechercheBienImmobilierAvecBudget(budget);
     }
     else if(m_recherche == "2")
     {
-        std::cout << "l pour un local professionnel" << std::endl;
-        std::cout << "t pour un terrain" << std::endl;
-        std::cout << "m pour une maison" << std::endl;
-        std::cout << "a pour un appartement" << std::endl;
-        std::cin >> bienImmobilierType;
+        cout << "l pour un local professionnel" << endl;
+        cout << "t pour un terrain" << endl;
+        cout << "m pour une maison" << endl;
+        cout << "a pour un appartement" << endl;
+        cin >> bienImmobilierType;
         resultatRecherche = rechercheBienImmobilierAvecType(bienImmobilierType);
     }
     else if(m_recherche == "3")
     {
-        std::cout<< "Superficie minimale" << std::endl;
-        std::cin >> superficieMin;
+        cout<< "Superficie minimale" << endl;
+        cin >> superficieMin;
         while(!estNombre(superficieMin))
         {
-            std::cin >> superficieMin;
+            cin >> superficieMin;
         }
-        std::cout<< "Superficie maximale" << std::endl;
-        std::cin >> superficieMax;
+        cout<< "Superficie maximale" << endl;
+        cin >> superficieMax;
         while(!estNombre(superficieMax))
         {
-            std::cin >> superficieMax;
+            cin >> superficieMax;
         }
-        resultatRecherche = rechercheBienImmobilierAvecSuperficie(std::stoi(superficieMin), std::stoi(superficieMax));
+        resultatRecherche = rechercheBienImmobilierAvecSuperficie(stoi(superficieMin), stoi(superficieMax));
     }
     else
     {
-        std::cout << "Désolé votre requête n'a pas été reconnu, veuillez en effectuer une nouvelle" << std::endl;
+        cout << "Désolé votre requête n'a pas été reconnu, veuillez en effectuer une nouvelle" << endl;
     }
 
     for(BienImmobilier re : resultatRecherche) {
-        std::cout << "L' " << re.getType() << " n°" << re.getIdentifiant() << " est disponible pour";
-        std::cout << re.getPrix() << "€ et est vendu par " << re.getVendeur().getPrenom();
-        std::cout << " " << re.getVendeur().getNom() << std::endl;
+        cout << "L' " << re.getType() << " n°" << re.getIdentifiant() << " est disponible pour";
+        cout << re.getPrix() << "€ et est vendu par " << re.getVendeur().getPrenom();
+        cout << " " << re.getVendeur().getNom() << endl;
     }
     if(resultatRecherche.empty())
     {
-        std::cout << "Aucun bien immobilier ne correspond à votre demande" << std::endl;
+        cout << "Aucun bien immobilier ne correspond à votre demande" << endl;
     }
 
 }
 
 void UserInterface::AfficherMenu() const
 {
-    std::cout << "Appuyez sur q et validé pour quitter l'application" << std::endl;
-    std::cout << "Menu : " << std::endl;
-    std::cout << "1) Ajout d'un client" << std::endl;
-    std::cout << "2) Ajout d'un bien immobilier" << std::endl;
-    std::cout << "3) Declarer une visite" << std::endl;
-    std::cout << "4) Afficher tout les clients" << std::endl;
-    std::cout << "5) Afficher tout les biens immobiliers" << std::endl;
-    std::cout << "6) Supprimer un vendeur" << std::endl;
-    std::cout << "7) Supprimer un acheteur" << std::endl;
-    std::cout << "8) Supprimer un bien immobilier" << std::endl;
-    std::cout << "9) Trouver le bien immobilier de vos rêves" << std::endl;
-    std::cout << "10) Autre demande" << std::endl;
+    cout << "Appuyez sur q et validé pour quitter l'application" << endl;
+    cout << "Menu : " << endl;
+    cout << "1) Ajout d'un client" << endl;
+    cout << "2) Ajout d'un bien immobilier" << endl;
+    cout << "3) Declarer une visite" << endl;
+    cout << "4) Afficher tout les clients" << endl;
+    cout << "5) Afficher tout les biens immobiliers" << endl;
+    cout << "6) Supprimer un vendeur" << endl;
+    cout << "7) Supprimer un acheteur" << endl;
+    cout << "8) Supprimer un bien immobilier" << endl;
+    cout << "9) Trouver le bien immobilier de vos rêves" << endl;
+    cout << "10) Autre demande" << endl;
 }
 
 void UserInterface::lire()
@@ -504,7 +506,7 @@ void UserInterface::lire()
     while (!m_quitter)
     {
         AfficherMenu();
-        std::cin >> m_requete;
+        cin >> m_requete;
         if (m_requete == "q" || m_requete == "quit" || m_requete == "exit")
         {
             m_quitter = true;
@@ -562,9 +564,9 @@ void UserInterface::lire()
         else if (m_requete == "10")
         {
             system("clear");
-            std::cout << "Une autre demande a été traité." << std::endl;
+            cout << "Une autre demande a été traité." << endl;
         } else {
-            std::cout << "Désolé mais votre requête n'a pas été reconnu, veuillez en effectuer une nouvelle" << std::endl;
+            cout << "Désolé mais votre requête n'a pas été reconnu, veuillez en effectuer une nouvelle" << endl;
         }
     }
 

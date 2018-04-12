@@ -1,6 +1,8 @@
 #include "maison.h"
 
-Maison::Maison(std::string adresse, short surface, unsigned int prix, Vendeur seller, unsigned short nbSalles, bool piscine, bool garage)
+using namespace std;
+
+Maison::Maison(string adresse, short surface, unsigned int prix, Vendeur seller, unsigned short nbSalles, bool piscine, bool garage)
     :BienImmobilier(prix, adresse, surface, seller), m_nbSalles(nbSalles), m_piscine(piscine), m_garage(garage)
 {
 
@@ -36,7 +38,7 @@ void Maison::setGarage(bool has)
     m_garage = has;
 }
 
-std::string Maison::getType() const
+string Maison::getType() const
 {
     return "maison";
 }

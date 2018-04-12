@@ -10,15 +10,15 @@ using namespace std;
 
 int main()
 {
-    Agence agency;
-    agency.ouverture();
-    UserInterface ui(&agency);
-    std::cout << "Welcome to your new Agency Handling software" << std::endl;
+    Agence agence;
+    agence.ouverture();
+    UserInterface ui(&agence);
+    cout << "Bienvenue dans l'application de gestion de votre agence" << endl;
     while (ui.estValider())
     {
         ui.lire();
     }
-    agency.sauvegarde();
-    std::cout << "Thank you for using our software, see you !" << std::endl;
+    agence.sauvegarde();
+    std::cout << "Fermeture de l'application" << std::endl;
     return 0;
 }

@@ -1,5 +1,7 @@
 #include "client.h"
 
+using namespace std;
+
 int Client::m_id = 0;
 
 Client::Client()
@@ -7,21 +9,21 @@ Client::Client()
 {
 }
 
-Client::Client(std::string nom, std::string prenom, std::string adresse)
+Client::Client(string nom, string prenom, string adresse)
     :m_identifiant(++m_id), m_nom(nom), m_prenom(prenom), m_adresse(adresse)
 {}
 
-std::string Client::getNom() const
+string Client::getNom() const
 {
     return m_nom;
 }
 
-std::string Client::getPrenom() const
+string Client::getPrenom() const
 {
     return m_prenom;
 }
 
-std::string Client::getAdresse() const
+string Client::getAdresse() const
 {
     return m_adresse;
 }
@@ -31,17 +33,17 @@ int Client::getId() const
     return m_identifiant;
 }
 
-void Client::setNom(std::string newNom)
+void Client::setNom(string newNom)
 {
     this->m_nom = newNom;
 }
 
-void Client::setPrenom(std::string newPrenom)
+void Client::setPrenom(string newPrenom)
 {
     this->m_prenom = newPrenom;
 }
 
-void Client::setAdresse(std::string newAdresse)
+void Client::setAdresse(string newAdresse)
 {
     this->m_adresse = newAdresse;
 }

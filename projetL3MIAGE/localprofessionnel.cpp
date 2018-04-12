@@ -1,11 +1,13 @@
 #include "localprofessionnel.h"
 
+using namespace std;
+
 LocalProfessionnel::LocalProfessionnel()
 {
 
 }
 
-LocalProfessionnel::LocalProfessionnel(unsigned short tailleVitrine, bool salleDeStockageDeMateriaux, unsigned int prix, std::string adresse, short surface, Vendeur vendeur)
+LocalProfessionnel::LocalProfessionnel(unsigned short tailleVitrine, bool salleDeStockageDeMateriaux, unsigned int prix, string adresse, short surface, Vendeur vendeur)
     :BienImmobilier(prix, adresse, surface, vendeur), m_tailleVitrine(tailleVitrine), m_salleDeStockageDeMateriaux(salleDeStockageDeMateriaux)
 {
 }
@@ -15,7 +17,7 @@ bool LocalProfessionnel::getSalleDeStockage() const
     return m_salleDeStockageDeMateriaux;
 }
 
-std::string LocalProfessionnel::getType() const
+string LocalProfessionnel::getType() const
 {
     return "local professionnel";
 }

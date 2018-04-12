@@ -1,11 +1,13 @@
 #include "agence.h"
 
-std::vector<Client> Agence::getClients() const
+using namespace std;
+
+vector<Client> Agence::getClients() const
 {
     return m_clients;
 }
 
-std::map<BienImmobilier*, Vendeur> Agence::getBienImmobiliers() const
+map<BienImmobilier*, Vendeur> Agence::getBienImmobiliers() const
 {
     return m_bienImmobiliers;
 }
@@ -17,13 +19,13 @@ void Agence::ajoutClient(Client &client)
 
 void Agence::ajoutBienImmobilier(Vendeur &vendeur, BienImmobilier *bienImmobilier)
 {
-    m_bienImmobiliers.insert(std::make_pair(bienImmobilier, vendeur));
+    m_bienImmobiliers.insert(make_pair(bienImmobilier, vendeur));
 }
 
 void Agence::vendre(BienImmobilier re)
 {
     m_bienImmobiliers.erase(m_bienImmobiliers.find(&re));
-    std::cout << "Bien immobilier vendu" << std::endl;
+    cout << "Bien immobilier vendu" << endl;
 }
 
 void Agence::sauvegarde()
@@ -35,7 +37,7 @@ void Agence::sauvegarde()
 
 void Agence::sauvegardeVendeurs()
 {
-    std::ofstream fichier_vendeur("../save/vendeurs.txt", std::ios::out | std::ios::trunc);
+    ofstream fichier_vendeur("../save/vendeurs.txt", ios::out | ios::trunc);
     if(fichier_vendeur) {
         for(Vendeur v : m_vendeurs) {
             fichier_vendeur << v.getNom() << ":" << v.getPrenom() << ":"
@@ -43,13 +45,13 @@ void Agence::sauvegardeVendeurs()
         }
         fichier_vendeur.close();
     } else {
-        std::cerr << "Impossible d'ouvrir vendeurs.txt" << std::endl;
+        cerr << "Impossible d'ouvrir vendeurs.txt" << endl;
     }
 }
 
 void Agence::sauvegardeAcheteurs()
 {
-    std::ofstream fichier_acheteur("../save/acheteurs.txt", std::ios::out | std::ios::trunc);
+    ofstream fichier_acheteur("../save/acheteurs.txt", ios::out | ios::trunc);
     if(fichier_acheteur) {
         for(Acheteur a : m_acheteur) {
             fichier_acheteur << a.getNom() << ":" << a.getPrenom() << ":"
@@ -57,15 +59,15 @@ void Agence::sauvegardeAcheteurs()
         }
         fichier_acheteur.close();
     } else {
-        std::cerr << "Impossible d'ouvrir acheteurs.txt" << std::endl;
+        cerr << "Impossible d'ouvrir acheteurs.txt" << endl;
     }
 }
 
 void Agence::sauvegardeBienImmobiliers()
 {
-    std::ofstream fichier_bienImmobilier("../save/bienImmobiliers.txt", std::ios::out | std::ios::trunc);
+    ofstream fichier_bienImmobilier("../save/bienImmobiliers.txt", ios::out | ios::trunc);
     if(fichier_bienImmobilier) {
-        for (std::pair<BienImmobilier*,Client> b : m_bienImmobiliers) {
+        for (pair<BienImmobilier*,Client> b : m_bienImmobiliers) {
             if(b.first->getSauvegardeType() == 'a') {
                 Appartement *f = dynamic_cast<Appartement*>(b.first);
                 fichier_bienImmobilier << "a:" << f->getAdresse() << ":" << f->getSurface() << ":" << f->getPrix() << ":"
@@ -94,7 +96,7 @@ void Agence::sauvegardeBienImmobiliers()
         }
         fichier_bienImmobilier.close();
     } else {
-        std::cerr << "Impossible d'ouvrir bienImmobiliers.txt" << std::endl;
+        cerr << "Impossible d'ouvrir bienImmobiliers.txt" << endl;
     }
 }
 
@@ -107,11 +109,11 @@ void Agence::ouverture()
 
 void Agence::ouvertureVendeurs()
 {
-    std::ifstream fichier_vendeur("../save/vendeurs.txt", std::ios::in);
+    ifstream fichier_vendeur("../save/vendeurs.txt", ios::in);
     if(fichier_vendeur) {
-        std::string contenu;
-        while(std::getline(fichier_vendeur, contenu)) {
-            std::vector<std::string> vendeur_infos = separation(contenu,':');
+        string contenu;
+        while(getline(fichier_vendeur, contenu)) {
+            vector<string> vendeur_infos = separation(contenu,':');
             Vendeur s;
             s.setNom(vendeur_infos[0]);
             s.setPrenom(vendeur_infos[1]);
@@ -119,17 +121,17 @@ void Agence::ouvertureVendeurs()
             m_vendeurs.push_back(s);
         }
     } else {
-        std::cerr << "Impossible d'ouvrir vendeurs.txt" << std::endl;
+        cerr << "Impossible d'ouvrir vendeurs.txt" << endl;
     }
 }
 
 void Agence::ouvertureAcheteurs()
 {
-    std::ifstream fichier_acheteur("../save/acheteurs.txt", std::ios::in);
+    ifstream fichier_acheteur("../save/acheteurs.txt", ios::in);
     if(fichier_acheteur) {
-        std::string contenu;
-        while(std::getline(fichier_acheteur, contenu)) {
-            std::vector<std::string> acheteur_infos = separation(contenu,':');
+        string contenu;
+        while(getline(fichier_acheteur, contenu)) {
+            vector<string> acheteur_infos = separation(contenu,':');
             Acheteur b;
             b.setNom(acheteur_infos[0]);
             b.setPrenom(acheteur_infos[1]);
@@ -137,45 +139,45 @@ void Agence::ouvertureAcheteurs()
             m_acheteur.push_back(b);
         }
     } else {
-        std::cerr << "Impossible d'ouvrir acheteurs.txt" << std::endl;
+        cerr << "Impossible d'ouvrir acheteurs.txt" << endl;
     }
 }
 
-void Agence::ouvertureAppartement(std::vector<std::string> infos)
+void Agence::ouvertureAppartement(vector<string> infos)
 {
     Vendeur v = trouverVendeur(infos[4]);
-    Appartement *a = new Appartement(infos[1], std::stoi(infos[2]), std::stoi(infos[3]), v, std::stoi(infos[5]), std::stoi(infos[6]), std::stoi(infos[7]), std::stoi(infos[8]), std::stoi(infos[9]), std::stoi(infos[10]));
+    Appartement *a = new Appartement(infos[1], stoi(infos[2]), stoi(infos[3]), v, stoi(infos[5]), stoi(infos[6]), stoi(infos[7]), stoi(infos[8]), stoi(infos[9]), stoi(infos[10]));
     ajoutBienImmobilier(v, a);
 }
 
-void Agence::ouvertureLocalProfessionnel(std::vector<std::string> infos)
+void Agence::ouvertureLocalProfessionnel(vector<string> infos)
 {
     Vendeur v = trouverVendeur(infos[6]);
-    LocalProfessionnel *lp = new LocalProfessionnel(std::stoi(infos[1]), std::stoi(infos[2]), std::stoi(infos[3]), infos[4], std::stoi(infos[5]), v);
+    LocalProfessionnel *lp = new LocalProfessionnel(stoi(infos[1]), stoi(infos[2]), stoi(infos[3]), infos[4], stoi(infos[5]), v);
     ajoutBienImmobilier(v, lp);
 }
 
-void Agence::ouvertureMaison(std::vector<std::string> infos)
+void Agence::ouvertureMaison(vector<string> infos)
 {
     Vendeur v = trouverVendeur(infos[4]);
-    Maison *m = new Maison(infos[1], std::stoi(infos[2]), std::stoi(infos[3]), v, std::stoi(infos[5]), std::stoi(infos[6]), std::stoi(infos[7]));
+    Maison *m = new Maison(infos[1], stoi(infos[2]), stoi(infos[3]), v, stoi(infos[5]), stoi(infos[6]), stoi(infos[7]));
     ajoutBienImmobilier(v, m);
 }
 
-void Agence::ouvertureTerrains(std::vector<std::string> infos)
+void Agence::ouvertureTerrains(vector<string> infos)
 {
     Vendeur v = trouverVendeur(infos[5]);
-    Terrain *t = new Terrain(std::stoi(infos[1]),std::stoi(infos[2]), infos[3], std::stoi(infos[4]), v);
+    Terrain *t = new Terrain(stoi(infos[1]),stoi(infos[2]), infos[3], stoi(infos[4]), v);
     ajoutBienImmobilier(v, t);
 }
 
 void Agence::ouvertureBienImmobiliers()
 {
-    std::ifstream fichier_bienImmbilier("../save/bienImmobiliers.txt", std::ios::in);
+    ifstream fichier_bienImmbilier("../save/bienImmobiliers.txt", ios::in);
     if(fichier_bienImmbilier) {
-        std::string contenu;
-        while(std::getline(fichier_bienImmbilier, contenu)) {
-            std::vector<std::string> bienImmobiliersinfos = separation(contenu,':');
+        string contenu;
+        while(getline(fichier_bienImmbilier, contenu)) {
+            vector<string> bienImmobiliersinfos = separation(contenu,':');
             if(bienImmobiliersinfos[0] == "a"){
                 ouvertureAppartement(bienImmobiliersinfos);
             } else if(bienImmobiliersinfos[0] == "l") {
@@ -187,27 +189,27 @@ void Agence::ouvertureBienImmobiliers()
             }
         }
     } else {
-        std::cerr << "Impossible d'ouvrir bienImmobiliers.txt" << std::endl;
+        cerr << "Impossible d'ouvrir bienImmobiliers.txt" << endl;
     }
 }
 
-Vendeur Agence::trouverVendeur(std::string id) const
+Vendeur Agence::trouverVendeur(string id) const
 {
     Vendeur v;
     for(Vendeur s : m_vendeurs) {
-        if(s.getId() == std::stoi(id)) {
+        if(s.getId() == stoi(id)) {
             v=s;
         }
     }
     return v;
 }
 
-std::vector<Vendeur> Agence::getVendeurs()const
+vector<Vendeur> Agence::getVendeurs()const
 {
     return m_vendeurs;
 }
 
-std::vector<Acheteur> Agence::getAcheteurs() const
+vector<Acheteur> Agence::getAcheteurs() const
 {
     return m_acheteur;
 }
@@ -222,12 +224,12 @@ void Agence::ajoutVendeur(Vendeur &s)
     m_vendeurs.push_back(s);
 }
 
-std::vector<std::string> Agence::separation(std::string stringASeparer, char separateur)
+vector<string> Agence::separation(string stringASeparer, char separateur)
 {
-    std::vector<std::string> stringSeparer;
-    std::string::size_type stTemp = stringASeparer.find(separateur);
+    vector<string> stringSeparer;
+    string::size_type stTemp = stringASeparer.find(separateur);
 
-    while(stTemp != std::string::npos)
+    while(stTemp != string::npos)
     {
         stringSeparer.push_back(stringASeparer.substr(0, stTemp));
         stringASeparer = stringASeparer.substr(stTemp + 1);
@@ -238,7 +240,7 @@ std::vector<std::string> Agence::separation(std::string stringASeparer, char sep
 
     return stringSeparer;
 }
-bool Agence::estNombre(std::string str)
+bool Agence::estNombre(string str)
 {
     if (str.length()==0)
     {
@@ -248,7 +250,7 @@ bool Agence::estNombre(std::string str)
     {
         if (str[i] < '0' || str[i] > '9')
         {
-            std::cout << "Un nombre est requis." << std::endl;
+            cout << "Un nombre est requis." << endl;
             return false;
         }
     }
@@ -258,45 +260,45 @@ bool Agence::estNombre(std::string str)
 void Agence::suppressionAcheteur()
 {
     int i = 1;
-    std::string choix;
+    string choix;
     for (Acheteur b : m_acheteur)
     {
-        std::cout << i << ") " << b.getPrenom() << " " << b.getNom() << std::endl;
+        cout << i << ") " << b.getPrenom() << " " << b.getNom() << endl;
         ++i;
     }
 
     do {
-        std::cin >> choix;
-    } while (!estNombre(choix) && (unsigned int)std::stoi(choix) > m_acheteur.size());
+        cin >> choix;
+    } while (!estNombre(choix) && (unsigned int)stoi(choix) > m_acheteur.size());
     //Supprimer toutes les visites
-    m_acheteur[std::stoi(choix) - 1].getVisites().clear();
+    m_acheteur[stoi(choix) - 1].getVisites().clear();
     //Supprimer le vendeur
-    m_acheteur.erase(m_acheteur.begin()+std::stoi(choix) - 1);
+    m_acheteur.erase(m_acheteur.begin()+stoi(choix) - 1);
 }
 
 void Agence::suppressionVendeur()
 {
     int i = 1;
-    std::string choix;
+    string choix;
     for (Vendeur s : m_vendeurs)
     {
-        std::cout << i << ") " << s.getPrenom() << " " << s.getNom() << std::endl;
+        cout << i << ") " << s.getPrenom() << " " << s.getNom() << endl;
         ++i;
     }
 
     do {
-        std::cin >> choix;
-    } while (!estNombre(choix) && (unsigned int)std::stoi(choix) > m_vendeurs.size());
+        cin >> choix;
+    } while (!estNombre(choix) && (unsigned int)stoi(choix) > m_vendeurs.size());
     //Supprimer tout les bien immobiliers
-    for (std::pair<BienImmobilier*, Vendeur> pre : m_bienImmobiliers)
+    for (pair<BienImmobilier*, Vendeur> pre : m_bienImmobiliers)
     {
-        if (pre.second.getId() == m_vendeurs[std::stoi(choix) - 1].getId())
+        if (pre.second.getId() == m_vendeurs[stoi(choix) - 1].getId())
         {
             m_bienImmobiliers.erase(pre.first);
         }
     }
     //Supprimer le vendeur
-    m_vendeurs.erase(m_vendeurs.begin()+std::stoi(choix) - 1);
+    m_vendeurs.erase(m_vendeurs.begin()+stoi(choix) - 1);
 }
 
 void Agence::suppressionBienImmobilier(BienImmobilier re)

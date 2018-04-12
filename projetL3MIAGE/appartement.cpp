@@ -1,12 +1,14 @@
 #include "appartement.h"
 
-Appartement::Appartement(std::string addresse, short surface, unsigned int prix, Vendeur seller, unsigned short nbSalles, unsigned int etage, bool garage, bool cave, bool balcon, unsigned int nbAppartBatiment)
+using namespace std;
+
+Appartement::Appartement(string addresse, short surface, unsigned int prix, Vendeur seller, unsigned short nbSalles, unsigned int etage, bool garage, bool cave, bool balcon, unsigned int nbAppartBatiment)
     :BienImmobilier(prix, addresse, surface, seller), m_nbSalles(nbSalles), m_etage(etage), m_garage(garage), m_cave(cave), m_balcon(balcon), m_nbAppartBatiment(nbAppartBatiment)
 {
 
 }
 
-std::string Appartement::getType() const
+string Appartement::getType() const
 {
     return "appartement";
 }
@@ -78,21 +80,21 @@ void Appartement::setNbAppartBatiment(unsigned int newNbAppartBatiment)
 
 void Appartement::afficher() const
 {
-    std::cout << "L'appartement est localisé à " << m_adresse << std::endl;
-    std::cout << "Il est vendu pour " << m_prix << "€" << std::endl;
-    std::cout << "Ca surface " << m_surface << " est divisé en " << m_nbSalles << " salles." << std::endl;
-    std::cout << "Il est à l'étage n° " << m_etage << std::endl << std::endl;
+    cout << "L'appartement est localisé à " << m_adresse << endl;
+    cout << "Il est vendu pour " << m_prix << "€" << endl;
+    cout << "Ca surface " << m_surface << " est divisé en " << m_nbSalles << " salles." << endl;
+    cout << "Il est à l'étage n° " << m_etage << endl << endl;
     if (m_garage)
     {
-        std::cout << "Il a un garage." << std::endl;
+        cout << "Il a un garage." << endl;
     }
     if (m_cave)
     {
-        std::cout << "Il a une cave." << std::endl;
+        cout << "Il a une cave." << endl;
     }
     if (m_balcon)
     {
-        std::cout << "Il a aussi un balcon." << std::endl;
+        cout << "Il a aussi un balcon." << endl;
     }
-    std::cout << "Dans le batiment, on peut compter " << m_nbAppartBatiment << " appartements" << std::endl;
+    cout << "Dans le batiment, on peut compter " << m_nbAppartBatiment << " appartements" << endl;
 }

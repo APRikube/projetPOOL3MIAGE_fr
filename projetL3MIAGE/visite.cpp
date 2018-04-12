@@ -1,5 +1,7 @@
 #include "visite.h"
 
+using namespace std;
+
 Visite::Visite(Acheteur b, Vendeur s, BienImmobilier re)
     :m_acheteur(b), m_vendeur(s), m_re(re)
 {
@@ -37,10 +39,10 @@ void Visite::setBienImmobilier(BienImmobilier newBienImmobilier)
 
 void Visite::afficher() const
 {
-    std::cout << "Il concerne le bien immobilier de " << m_vendeur.getNom() << std::endl;
-    std::cout << "Ce bien immobilier est localisé à " << m_re.getAdresse() << std::endl;
-    std::cout << "Il couvre une superficie de " << m_re.getSurface() << " métres carrés " << std::endl;
-    std::cout << "Il est vendu pour le prix de : " << m_re.getPrix() << std::endl;
+    cout << "Il concerne le bien immobilier de " << m_vendeur.getNom() << endl;
+    cout << "Ce bien immobilier est localisé à " << m_re.getAdresse() << endl;
+    cout << "Il couvre une superficie de " << m_re.getSurface() << " métres carrés " << endl;
+    cout << "Il est vendu pour le prix de : " << m_re.getPrix() << endl;
 }
 
 bool Visite::operator<(Visite const & v) const

@@ -1,8 +1,10 @@
 #include "bienimmobilier.h"
 
+using namespace std;
+
 int BienImmobilier::nextId = 0;
 
-BienImmobilier::BienImmobilier(unsigned int prix, std::string addresse, unsigned short surface, Vendeur vendeur)
+BienImmobilier::BienImmobilier(unsigned int prix, string addresse, unsigned short surface, Vendeur vendeur)
     :m_prix(prix), m_adresse(addresse), m_surface(surface), m_vendeur(vendeur)
 {
     m_identifiant = BienImmobilier::nextId++;
@@ -23,7 +25,7 @@ unsigned int BienImmobilier::getPrix() const
     return m_prix;
 }
 
-std::string BienImmobilier::getAdresse() const
+string BienImmobilier::getAdresse() const
 {
     return m_adresse;
 }
@@ -43,7 +45,7 @@ int BienImmobilier::getIdentifiant() const
     return m_identifiant;
 }
 
-std::string BienImmobilier::getType() const
+string BienImmobilier::getType() const
 {
     return "bien immobilier";
 }
@@ -65,5 +67,5 @@ bool BienImmobilier::operator==(const BienImmobilier & re) const
 
 void BienImmobilier::afficher() const
 {
-    std::cout << "Mon bien immobilierrrrrr" << std::endl;
+    cout << "Mon bien immobilierrrrrr" << endl;
 }

@@ -1,13 +1,14 @@
 #include "terrain.h"
 
+using namespace std;
 
-Terrain::Terrain(bool constructible, unsigned int prix, std::string adresse, short surface, Vendeur vendeur)
+Terrain::Terrain(bool constructible, unsigned int prix, string adresse, short surface, Vendeur vendeur)
     :BienImmobilier(prix, adresse, surface, vendeur), m_constructible(constructible)
 {
 
 }
 
-std::string Terrain::getType() const
+string Terrain::getType() const
 {
     return "terrain";
 }

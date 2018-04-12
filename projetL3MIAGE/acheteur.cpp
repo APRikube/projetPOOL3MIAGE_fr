@@ -1,6 +1,8 @@
 #include "acheteur.h"
 #include "visite.h"
 
+using namespace std;
+
 Acheteur::Acheteur()
     : m_propositionAchat(false)
 {
@@ -12,7 +14,7 @@ bool Acheteur::getPropositionAchat() const
     return m_propositionAchat;
 }
 
-std::set<Visite> Acheteur::getVisites()
+set<Visite> Acheteur::getVisites()
 {
     return m_visites;
 }
@@ -30,12 +32,12 @@ void Acheteur::ajoutVisite(Visite v)
 void Acheteur::afficherVisites() const
 {
     if (!m_visites.empty()){
-        std::cout << this->m_prenom << " " << this->m_nom << " a visité ses biens immobiliers :" << std::endl;
+        cout << this->m_prenom << " " << this->m_nom << " a visité ses biens immobiliers :" << endl;
         for(Visite v : m_visites)
         {
             v.afficher();
         }
     } else {
-        std::cout << this->m_prenom << " " << this->m_nom << " n'a visité aucun bien immobilier." << std::endl;
+        cout << this->m_prenom << " " << this->m_nom << " n'a visité aucun bien immobilier." << endl;
     }
 }

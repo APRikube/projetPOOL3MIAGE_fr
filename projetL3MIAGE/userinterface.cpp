@@ -83,17 +83,17 @@ Acheteur UserInterface::choixAcheteur()
     //Recupère les valeurs entrées au clavier
     do {
         cin >> choix;
-    } while (!estNombre(choix) && (unsigned int)stoi(choix) > m_agence->getAcheteurs().size());
+    } while (!estNombre(choix) || (unsigned int)stoi(choix) > m_agence->getAcheteurs().size() || (unsigned int)stoi(choix) == 0);
 
     return m_agence->getAcheteurs()[stoi(choix)-1];
 }
 
-BienImmobilier UserInterface::chooseRealEstate(Vendeur s)
+BienImmobilier UserInterface::choixBienImmobilier(Vendeur s)
 {
     //Affiche tout les biens immobiliers du vendeur
     int i = 1;
     string choix;
-    vector <BienImmobilier> vre;
+    vector<BienImmobilier> vre;
     for (pair<BienImmobilier*, Vendeur> re : m_agence->getBienImmobiliers())
     {
         if (re.second.getId() == s.getId())
@@ -105,7 +105,7 @@ BienImmobilier UserInterface::chooseRealEstate(Vendeur s)
     //Récupère le choix de l'utilisateur
     do {
         cin >> choix;
-    } while (!estNombre(choix) && (unsigned int)stoi(choix) > m_agence->getBienImmobiliers().size());
+    } while (!estNombre(choix) || (unsigned int)stoi(choix) > m_agence->getBienImmobiliers().size() || (unsigned int)stoi(choix) == 0);
 
     return vre[stoi(choix)-1];
 }
@@ -124,7 +124,7 @@ Vendeur UserInterface::choixVendeur()
     //Lis les valeurs entrées au clavier
     do {
         cin >> choix;
-    } while (!estNombre(choix) && (unsigned int)stoi(choix) > m_agence->getVendeurs().size());
+    } while (!estNombre(choix) || (unsigned int)stoi(choix) > m_agence->getVendeurs().size() || (unsigned int)stoi(choix) == 0);
 
     return m_agence->getVendeurs()[stoi(choix)-1];
 }
@@ -289,7 +289,7 @@ void UserInterface::declarerVisite()
         BienImmobilier re;
         b = choixAcheteur();
         s = choixVendeur();
-        re = chooseRealEstate(s);
+        re = choixBienImmobilier(s);
         Visite v(b,s,re);
         b.ajoutVisite(v);
     }
@@ -359,7 +359,7 @@ void UserInterface::supprimerBienImmobilier()
         cout << "Il n'y a pas de bien immobilier" << endl;
     } else {
         cout << "Choissisez votre vendeur : " << endl;
-        m_agence->suppressionBienImmobilier(chooseRealEstate(choixVendeur()));
+        m_agence->suppressionBienImmobilier(choixBienImmobilier(choixVendeur()));
         m_agence->sauvegarde();
     }
 }

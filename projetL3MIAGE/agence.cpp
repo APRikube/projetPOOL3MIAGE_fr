@@ -303,5 +303,7 @@ void Agence::suppressionVendeur()
 
 void Agence::suppressionBienImmobilier(BienImmobilier re)
 {
-    m_bienImmobiliers.erase(m_bienImmobiliers.find(&re));
+    map<BienImmobilier*,Vendeur>::iterator it;
+    it = m_bienImmobiliers.find((&re));
+    m_bienImmobiliers.erase(it);
 }

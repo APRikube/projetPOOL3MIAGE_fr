@@ -53,7 +53,7 @@ public:
 
     Vendeur choixVendeur();
     Acheteur choixAcheteur();
-    BienImmobilier chooseRealEstate(Vendeur s);
+    BienImmobilier choixBienImmobilier(Vendeur s);
 };
 
 #endif // USERINTERFACE_H

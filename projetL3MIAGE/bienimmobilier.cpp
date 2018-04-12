@@ -19,6 +19,11 @@ BienImmobilier::BienImmobilier(const BienImmobilier & re)
     this->m_surface = re.getSurface();
 }
 
+virtual BienImmobilier::~BienImmobilier()
+{
+
+}
+
 //Getters
 unsigned int BienImmobilier::getPrix() const
 {

@@ -17,7 +17,7 @@ public:
     BienImmobilier() = default;
     BienImmobilier(const BienImmobilier & re);
     BienImmobilier(unsigned int prix, std::string addresse, unsigned short surface, Vendeur vendeur);
-
+    virtual ~BienImmobilier();
     //Getters
     unsigned int getPrix() const;
     std::string getAdresse() const;

@@ -10,6 +10,7 @@ class Vendeur : public Client
 {
 public:
     Vendeur();
+    Vendeur(std::string nom, std::string prenom, std::string adresse);
 
     virtual std::string getType() const;
 

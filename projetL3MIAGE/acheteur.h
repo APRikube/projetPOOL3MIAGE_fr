@@ -13,6 +13,7 @@ protected:
     std::set<Visite> m_visites;
 public:
     Acheteur();
+    Acheteur(std::string nom, std::string prenom, std::string adresse);
 
     //Getters
     bool getPropositionAchat() const;

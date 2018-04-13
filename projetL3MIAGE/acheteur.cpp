@@ -4,7 +4,13 @@
 using namespace std;
 
 Acheteur::Acheteur()
-    : m_propositionAchat(false)
+    : Client(), m_propositionAchat(false)
+{
+
+}
+
+Acheteur::Acheteur(string nom, string prenom, string adresse)
+    : Client(nom, prenom, adresse), m_propositionAchat(false)
 {
 
 }

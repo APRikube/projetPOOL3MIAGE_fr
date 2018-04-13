@@ -5,10 +5,16 @@
 using namespace std;
 
 Vendeur::Vendeur()
+    : Client()
 {
 
 }
 
+Vendeur::Vendeur(string nom, string prenom, string adresse)
+    : Client(nom, prenom, adresse)
+{
+
+}
 
 string Vendeur::getType() const
 {

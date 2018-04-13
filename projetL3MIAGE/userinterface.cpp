@@ -35,18 +35,12 @@ void UserInterface::ajoutClient()
 
     if (type == "1")
     {
-        Acheteur b;
-        b.setAdresse(adresse);
-        b.setPrenom(prenom);
-        b.setNom(nom);
-        m_agence->ajoutAcheteur(b);
+        Acheteur a(nom, prenom, adresse);
+        m_agence->ajoutAcheteur(a);
         m_agence->sauvegarde();
     } else {
-        Vendeur s;
-        s.setAdresse(adresse);
-        s.setPrenom(prenom);
-        s.setNom(nom);
-        m_agence->ajoutVendeur(s);
+        Vendeur v(nom, prenom, adresse);
+        m_agence->ajoutVendeur(v);
         m_agence->sauvegarde();
     }
     cout << "Client ajouté !" << endl;

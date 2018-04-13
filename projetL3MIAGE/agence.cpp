@@ -2,30 +2,14 @@
 
 using namespace std;
 
-vector<Client> Agence::getClients() const
-{
-    return m_clients;
-}
-
 map<BienImmobilier*, Vendeur> Agence::getBienImmobiliers() const
 {
     return m_bienImmobiliers;
 }
 
-void Agence::ajoutClient(Client &client)
-{
-    m_clients.push_back(client);
-}
-
 void Agence::ajoutBienImmobilier(Vendeur &vendeur, BienImmobilier *bienImmobilier)
 {
     m_bienImmobiliers.insert(make_pair(bienImmobilier, vendeur));
-}
-
-void Agence::vendre(BienImmobilier re)
-{
-    m_bienImmobiliers.erase(m_bienImmobiliers.find(&re));
-    cout << "Bien immobilier vendu" << endl;
 }
 
 void Agence::sauvegarde()

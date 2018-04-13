@@ -19,9 +19,9 @@ set<Visite> Acheteur::getVisites()
     return m_visites;
 }
 
-string Acheteur::getSauvegardeType()
+char Acheteur::getSauvegardeType() const
 {
-    return "a";
+    return 'a';
 }
 
 void Acheteur::setPropositionAchat(bool newValue)

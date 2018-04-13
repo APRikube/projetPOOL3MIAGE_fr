@@ -297,7 +297,7 @@ void UserInterface::declarerVisite()
 
 void UserInterface::afficherClients() const
 {
-    if (m_agence->getAcheteurs().size() + m_agence->getClients().size() +
+    if (m_agence->getAcheteurs().size()+
             m_agence->getVendeurs().size()==0)
     {
         cout << "Il n'y a pas de clients" << endl;
@@ -316,14 +316,6 @@ void UserInterface::afficherClients() const
         for (Acheteur b : this->m_agence->getAcheteurs())
         {
             cout << b.getPrenom() << " " << b.getNom() << " loge à " << b.getAdresse() << endl;
-        }
-    }
-    if (m_agence->getClients().size()!=0)
-    {
-        cout << "Autres clients : " << endl;
-        for (Client c : this->m_agence->getClients())
-        {
-            cout << c.getPrenom() << " " << c.getNom() << " loge à " << c.getAdresse() << endl;
         }
     }
 }

@@ -19,7 +19,6 @@
 class Agence
 {
 private:
-    std::vector<Client> m_clients;
     std::vector<Vendeur> m_vendeurs;
     std::vector<Acheteur> m_acheteur;
     std::map<BienImmobilier*, Vendeur> m_bienImmobiliers;
@@ -28,21 +27,18 @@ public:
     Agence() = default;
 
     //Getters
-    std::vector<Client> getClients() const;
     std::map<BienImmobilier *, Vendeur> getBienImmobiliers() const;
     std::vector<Vendeur> getVendeurs() const;
     std::vector<Acheteur> getAcheteurs() const;
     //Setters
 
     //Other Methods
-    void ajoutClient(Client &client);
     void ajoutBienImmobilier(Vendeur &vendeur, BienImmobilier *bienImmobilier);
     void ajoutAcheteur(Acheteur &b);
     void ajoutVendeur(Vendeur &s);
     void suppressionAcheteur();
     void suppressionVendeur();
     void suppressionBienImmobilier(BienImmobilier re);
-    void vendre(BienImmobilier re);
 
     //save methods
     void sauvegarde();

@@ -21,7 +21,7 @@ public:
     std::string getPrenom() const;
     std::string getAdresse() const;
     int getId() const;
-    virtual std::string getSauvegardeType() const;
+    virtual char getSauvegardeType() const;
 
     //Setters
     void setNom(std::string newNom);

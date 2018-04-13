@@ -17,7 +17,7 @@ public:
     //Getters
     bool getPropositionAchat() const;
     std::set<Visite> getVisites();
-    virtual std::string getSauvegardeType() const;
+    virtual char getSauvegardeType() const;
 
     //Setters
     void setPropositionAchat(bool newValue);

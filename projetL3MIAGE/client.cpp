@@ -33,9 +33,9 @@ int Client::getId() const
     return m_identifiant;
 }
 
-string Client::getSauvegardeType() const
+char Client::getSauvegardeType() const
 {
-    return "c";
+    return 'c';
 }
 
 void Client::setNom(string newNom)

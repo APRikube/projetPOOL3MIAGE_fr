@@ -8,18 +8,13 @@ class BienImmobilier;
 
 class Vendeur : public Client
 {
-private:
-    std::vector<BienImmobilier> m_bienImmobilierAVendre;
 public:
     Vendeur();
 
     virtual std::string getType() const;
-    void ajoutBienImmobilierAVendre(BienImmobilier re);
-    void vendreBienImmobilier(BienImmobilier re);
 
     //Getter
-    std::vector<BienImmobilier> getBienImmobilierAVendre() const;
-    virtual std::string getSauvegardeType() const;
+    virtual char getSauvegardeType() const;
 
 };
 

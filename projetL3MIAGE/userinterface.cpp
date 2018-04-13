@@ -15,10 +15,7 @@ bool UserInterface::estValider() const
 
 void UserInterface::ajoutClient()
 {
-    string nom;
-    string prenom;
-    string adresse;
-    string type;
+    string nom, prenom, adresse, type;
 
     cout << "Quel est le nom du nouveau client?" << endl;
     cin.ignore();
@@ -28,7 +25,7 @@ void UserInterface::ajoutClient()
     cout << "Quel est l'adresse du nouveau client?" << endl;
     getline(cin, adresse);
 
-    cout << "Est-ce que le nouveau client veut acheter un bien immobilier (appuyer sur 1 et valider) ou bien en vendre un (appuer sur 2 et valider)?" << endl;
+    cout << "Est-ce que le nouveau client veut acheter un bien immobilier (appuyer sur 1 et valider) ou bien en vendre un (appuyer sur 2 et valider)?" << endl;
     do {
         cin >> type;
     } while (type != "1" && type != "2");
@@ -56,7 +53,7 @@ bool UserInterface::estNombre(string str)
     {
         if (str[i] < '0' || str[i] > '9')
         {
-            cout << "A nombre est requis" << endl;
+            cout << "Un nombre est requis" << endl;
             return false;
         }
     }

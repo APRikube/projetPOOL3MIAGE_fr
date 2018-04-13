@@ -19,7 +19,7 @@ BienImmobilier::BienImmobilier(const BienImmobilier & re)
     this->m_surface = re.getSurface();
 }
 
-virtual BienImmobilier::~BienImmobilier()
+BienImmobilier::~BienImmobilier()
 {
 
 }

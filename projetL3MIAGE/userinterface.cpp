@@ -552,6 +552,7 @@ void UserInterface::lire()
                 rechercheBienImmobilier();
                 system("clear");
             }
+            m_retourAuMenu = false;
         }
         else if (m_requete == "10")
         {

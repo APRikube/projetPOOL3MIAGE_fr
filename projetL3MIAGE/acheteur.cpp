@@ -19,6 +19,11 @@ set<Visite> Acheteur::getVisites()
     return m_visites;
 }
 
+string Acheteur::getSauvegardeType()
+{
+    return "a";
+}
+
 void Acheteur::setPropositionAchat(bool newValue)
 {
     m_propositionAchat = newValue;

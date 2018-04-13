@@ -19,6 +19,7 @@ public:
 
     //Getter
     std::vector<BienImmobilier> getBienImmobilierAVendre() const;
+    virtual std::string getSauvegardeType() const;
 
 };
 

@@ -21,11 +21,13 @@ public:
     std::string getPrenom() const;
     std::string getAdresse() const;
     int getId() const;
+    virtual std::string getSauvegardeType() const;
 
     //Setters
     void setNom(std::string newNom);
     void setPrenom(std::string newPrenom);
     void setAdresse(std::string newAdresse);
+
 };
 
 #endif // CUSTOMER_H

@@ -29,3 +29,8 @@ vector<BienImmobilier> Vendeur::getBienImmobilierAVendre() const
 {
     return m_bienImmobilierAVendre;
 }
+
+string Vendeur::getSauvegardeType() const
+{
+    return "v";
+}

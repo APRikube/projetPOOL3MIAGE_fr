@@ -2,6 +2,11 @@
 
 using namespace std;
 
+std::map<BienImmobilier *, std::vector<Acheteur> > Agence::getPropositionAchats() const
+{
+    return _propositionAchats;
+}
+
 map<BienImmobilier*, Vendeur> Agence::getBienImmobiliers() const
 {
     return m_bienImmobiliers;

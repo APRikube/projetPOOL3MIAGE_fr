@@ -22,6 +22,7 @@ private:
     std::vector<Vendeur> m_vendeurs;
     std::vector<Acheteur> m_acheteur;
     std::map<BienImmobilier*, Vendeur> m_bienImmobiliers;
+    std::map<BienImmobilier*,std::vector<Acheteur>> _propositionAchats;
 public:
     //Constructors
     Agence() = default;
@@ -30,6 +31,7 @@ public:
     std::map<BienImmobilier *, Vendeur> getBienImmobiliers() const;
     std::vector<Vendeur> getVendeurs() const;
     std::vector<Acheteur> getAcheteurs() const;
+    std::map<BienImmobilier *, std::vector<Acheteur> > getPropositionAchats() const;
     //Setters
 
     //Other Methods

@@ -491,7 +491,7 @@ void UserInterface::AfficherMenu() const
     cout << "7) Supprimer un acheteur" << endl;
     cout << "8) Supprimer un bien immobilier" << endl;
     cout << "9) Trouver le bien immobilier de vos rêves" << endl;
-    cout << "10) Autre demande" << endl;
+    cout << "10) Effectuer une proposition d'achat" << endl;
 }
 
 void UserInterface::lire()
@@ -555,8 +555,47 @@ void UserInterface::lire()
         }
         else if (m_requete == "10")
         {
-            system("clear");
-            cout << "Une autre demande a été traité." << endl;
+            if(m_agence->getAcheteurs().size() !=0)
+            {
+                string choix;
+                system("clear");
+                int compteurBE = 1;
+                int compteurA = 1;
+                for(pair<BienImmobilier*,Client> re : m_agence->getBienImmobiliers()) {
+                    cout <<compteurBE << ") L' " << re.first->getType() << " n°" << re.first->getIdentifiant() << " est disponible pour";
+                    cout << re.first->getPrix() << "€"<<endl;
+                    ++compteurBE;
+                }
+                do {
+                    cin >> choix;
+                } while (!estNombre(choix) || (unsigned int)stoi(choix) > m_agence->getBienImmobiliers().size() || (unsigned int)stoi(choix) == 0);
+
+                BienImmobilier *bienImmobilierChoisi;
+                compteurBE=1;
+                for(pair<BienImmobilier*,Client> re : m_agence->getBienImmobiliers()) {
+
+                    if(compteurBE==stoi(choix))
+                    {
+                        bienImmobilierChoisi = re.first;
+                    }
+                    ++compteurBE;
+                }
+
+                cout << "Pour quel acheteur ?" << endl;
+                for(Acheteur a : m_agence->getAcheteurs()) {
+                    cout << compteurA <<") "<<a.getPrenom() << " " << a.getNom() << " loge à " << a.getAdresse() << endl;
+                    ++compteurA;
+                }
+                do {
+                    cin >> choix;
+                } while (!estNombre(choix) || (unsigned int)stoi(choix) > m_agence->getBienImmobiliers().size() || (unsigned int)stoi(choix) == 0);
+
+            }
+            else
+            {
+                cout << "Pas d'acheteur pour effectuer une proposition d'achat. " << endl;
+            }
+
         } else {
             cout << "Désolé mais votre requête n'a pas été reconnu, veuillez en effectuer une nouvelle" << endl;
         }

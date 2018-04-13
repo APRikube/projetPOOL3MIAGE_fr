@@ -555,10 +555,12 @@ void UserInterface::lire()
         }
         else if (m_requete == "10")
         {
+
+            system("clear");
             if(m_agence->getAcheteurs().size() !=0)
             {
+                vector<Acheteur> acheteurDuBien;
                 string choix;
-                system("clear");
                 int compteurBE = 1;
                 int compteurA = 1;
                 for(pair<BienImmobilier*,Client> re : m_agence->getBienImmobiliers()) {
@@ -589,6 +591,22 @@ void UserInterface::lire()
                 do {
                     cin >> choix;
                 } while (!estNombre(choix) || (unsigned int)stoi(choix) > m_agence->getBienImmobiliers().size() || (unsigned int)stoi(choix) == 0);
+
+                for(pair<BienImmobilier*,vector<Acheteur>> re : m_agence->getPropositionAchats())
+                {
+                    if(re.first == bienImmobilierChoisi)
+                    {
+                        acheteurDuBien = re.second;
+                        re.second.push_back(m_agence->getAcheteurs()[stoi(choix)-1]);
+                        //acheteurDuBien.push_back(m_agence->getVendeurs()[stoi(choix)-1]);
+                        //m_agence->getPropositionAchats()
+                    }
+                }
+                if(acheteurDuBien.empty())
+                {
+                    acheteurDuBien.push_back(m_agence->getAcheteurs()[stoi(choix)-1]);
+                    m_agence->getPropositionAchats().insert(pair<BienImmobilier*,vector<Acheteur>>(bienImmobilierChoisi,acheteurDuBien));
+                }
 
             }
             else

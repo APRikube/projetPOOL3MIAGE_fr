@@ -73,24 +73,24 @@ void Agence::sauvegardeBienImmobiliers()
                 fichier_bienImmobilier << "a:" << f->getAdresse() << ":" << f->getSurface() << ":" << f->getPrix() << ":"
                                  << f->getVendeur().getId() << ":" << f->getNbSalles() << ":" << f->getEtage()
                                  << ":" << f->getGarage() << ":" << f->getCave()
-                                 << ":" << f->getBalcon() << ":" << f->getNbAppartBatiment();
+                                 << ":" << f->getBalcon() << ":" << f->getNbAppartBatiment() << "\n";
 
             } else if(b.first->getSauvegardeType() == 'l') {
                 LocalProfessionnel *pl = dynamic_cast<LocalProfessionnel*>(b.first);
                 fichier_bienImmobilier << "l:" << pl->getTailleVitrine() << ":" << pl->getSalleDeStockage()
                                  << ":" << pl->getPrix() << ":" << pl->getAdresse() << ":" << pl->getSurface()
-                                 << ":" << pl->getVendeur().getId();
+                                 << ":" << pl->getVendeur().getId() << "\n";
 
             } else if(b.first->getSauvegardeType() == 'm') {
                 Maison *h = dynamic_cast<Maison*>(b.first);
                 fichier_bienImmobilier << "h:" << h->getPrix() << ":" << h->getAdresse() << ":" << h->getSurface() << ":"
                                  << h->getVendeur().getId() << ":" << h->getNbSalles() << ":"
-                                 << h->hasPiscine() << ":" << h->hasGarage();
+                                 << h->hasPiscine() << ":" << h->hasGarage() << "\n";
 
             } else if (b.first->getSauvegardeType() == 't') {
                 Terrain *p = dynamic_cast<Terrain*>(b.first);
                 fichier_bienImmobilier << "t:" << p->getPrix() << ":" << p->getAdresse() << ":" << p->getSurface() << ":"
-                                 << p->getVendeur().getId() << ":" << p->getConstructible();
+                                 << p->getVendeur().getId() << ":" << p->getConstructible() << "\n";
 
             }
         }

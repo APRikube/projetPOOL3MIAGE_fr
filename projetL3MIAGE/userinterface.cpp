@@ -433,6 +433,7 @@ void UserInterface::rechercheBienImmobilier()
     else if(m_recherche == "1")
     {
         cin >> budget;
+        cout << budget << endl;
         resultatRecherche = rechercheBienImmobilierAvecBudget(budget);
     }
     else if(m_recherche == "2")
@@ -548,9 +549,7 @@ void UserInterface::lire()
         {
             while(!m_retourAuMenu)
             {
-                system("clear");
                 rechercheBienImmobilier();
-                system("clear");
             }
             m_retourAuMenu = false;
         }

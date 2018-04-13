@@ -315,5 +315,4 @@ void Agence::suppressionBienImmobilier(BienImmobilier re)
             it++;
         }
     }
-    //m_bienImmobiliers.erase(m_bienImmobiliers.find(&re));
 }

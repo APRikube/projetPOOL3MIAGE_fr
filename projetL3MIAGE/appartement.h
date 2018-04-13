@@ -14,6 +14,7 @@ private:
     bool m_balcon;
     unsigned int m_nbAppartBatiment;
 public:
+    //Constructeurs
     Appartement() = delete;
     Appartement(std::string addresse, short surface, unsigned int prix, Vendeur s, unsigned short nbSalles, unsigned int etage, bool garage, bool cave, bool balcon, unsigned int nbAppartBatiment);
 

@@ -11,7 +11,7 @@ private:
     bool m_piscine;
     bool m_garage;
 public:
-    //Constructors
+    //Constructeurs
     Maison() = delete;
     Maison(std::string adresse, short surface, unsigned int prix, Vendeur s, unsigned short nbSalles, bool piscine, bool garage);
 

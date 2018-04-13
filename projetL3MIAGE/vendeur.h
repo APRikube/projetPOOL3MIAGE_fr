@@ -9,13 +9,14 @@ class BienImmobilier;
 class Vendeur : public Client
 {
 public:
+    //Constructeurs
     Vendeur();
     Vendeur(std::string nom, std::string prenom, std::string adresse);
 
-    virtual std::string getType() const;
 
     //Getter
     virtual char getSauvegardeType() const;
+    virtual std::string getType() const;
 
 };
 

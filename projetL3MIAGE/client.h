@@ -12,7 +12,7 @@ protected:
     std::string m_prenom;
     std::string m_adresse;
 public:
-    //Constructor
+    //Constructeurs
     Client();
     Client(std::string nom, std::string prenom, std::string adresse);
 

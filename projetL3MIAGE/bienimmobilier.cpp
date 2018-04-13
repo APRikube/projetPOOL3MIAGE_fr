@@ -24,7 +24,6 @@ BienImmobilier::~BienImmobilier()
 
 }
 
-//Getters
 unsigned int BienImmobilier::getPrix() const
 {
     return m_prix;

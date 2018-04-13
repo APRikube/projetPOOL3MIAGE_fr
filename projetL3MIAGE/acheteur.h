@@ -12,6 +12,7 @@ protected:
     bool m_propositionAchat;
     std::set<Visite> m_visites;
 public:
+    //Constructeurs
     Acheteur();
     Acheteur(std::string nom, std::string prenom, std::string adresse);
 

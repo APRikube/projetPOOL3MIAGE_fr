@@ -13,22 +13,20 @@ protected:
     Vendeur m_vendeur;
     int m_identifiant;
 public:
-    //Constructors
+    //Constructeurs
     BienImmobilier() = default;
     BienImmobilier(const BienImmobilier & re);
     BienImmobilier(unsigned int prix, std::string addresse, unsigned short surface, Vendeur vendeur);
     virtual ~BienImmobilier();
+
     //Getters
     unsigned int getPrix() const;
     std::string getAdresse() const;
     short getSurface() const;
     Vendeur getVendeur() const;
     int getIdentifiant() const;
-
     virtual std::string getType() const;
     virtual char getSauvegardeType() const;
-
-    //Setters
 
     //Operator
     bool operator<(const BienImmobilier & re) const;

@@ -22,15 +22,14 @@ private:
     std::string m_recherche;
     Agence *m_agence;
 public:
+    //Constructeurs
     UserInterface() = delete;
     UserInterface(Agence *agence);
-
-    void lire();
 
     //Getters
     bool estValider() const;
 
-    //Setters
+    void lire();
 
     //Autres méthodes
     void AfficherMenu() const;

@@ -10,7 +10,7 @@ private:
     unsigned short m_tailleVitrine;
     bool m_salleDeStockageDeMateriaux;
 public:
-    //Constructors
+    //Constructeurs
     LocalProfessionnel();
     LocalProfessionnel(unsigned short tailleVitrine, bool salleDeStockageDeMateriaux,
                       unsigned int prix, std::string adresse, short surface, Vendeur vendeur);
